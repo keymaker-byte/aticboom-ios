@@ -1,0 +1,63 @@
+{
+    "achievements" : {
+        "ACHIVEMENT_YOHOHO" : 0,
+        "ACHIVEMENT_YOHOHEHO" : 0,
+        "ACHIVEMENT_ANCHORSAWEIGH" : 0,
+        "ACHIVEMENT_BOMBERSRIOT" : 0,
+        "ACHIVEMENT_SETTHESAILS" : 0,
+        "ACHIVEMENT_APIRATESLIFEFORME" : 0,
+        "ACHIVEMENT_CURSEDDOUBLOONS" : 0,
+        "ACHIVEMENT_THEMPEGBEONFIRE" : 0,
+        "ACHIVEMENT_HIGHASAFLYNFLAG" : 0,
+        "ACHIVEMENT_TOERRISHUMANTOARRISPIRATE" : 0,
+        "ACHIVEMENT_MOREBUBBLESFORTHECREW" : 0,
+        "ACHIVEMENT_ASAVINPIRATEVEWORTHTWO" : 0,
+        "ACHIVEMENT_YARRGH" : 0,
+        "ACHIVEMENT_AHOY" : 0,
+        "ACHIVEMENT_BLIMEY" : 0,
+        "ACHIVEMENT_BYTHEPOWERS" : 0,
+        "ACHIVEMENT_BLOWMEDOWN" : 0,
+        "ACHIVEMENT_SURVIVEDGOLDENHIND" : 0,
+        "ACHIVEMENT_SURVIVEDGOLDENNIGHT" : 0,
+        "ACHIVEMENT_SURVIVEDQUEENANNE" : 0,
+        "ACHIVEMENT_SURVIVEDQUEENANNENIGHT" : 0,
+        "ACHIVEMENT_SURVIVEDADVENTUREGALLERY" : 0,
+        "ACHIVEMENT_SURVIVEDADVENTURENIGHT" : 0,
+        "ACHIVEMENT_GILDGOLDENHIND" : 0,
+        "ACHIVEMENT_GILDGOLDENNIGHT" : 0,
+        "ACHIVEMENT_GILDQUEENANNE" : 0,
+        "ACHIVEMENT_GILDQUEENANNENIGHT" : 0,
+        "ACHIVEMENT_GILDADVENTUREGALLERY" : 0,
+        "ACHIVEMENT_GILDADVENTURENIGHT" : 0
+        
+    },
+    "score" : {
+        "GOLDENSKULL" : 0,
+        "FLOORS" : 0,
+        "BESTSCORE" : 0,
+        "WORLDS" : {
+            "1" : {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0},
+            "2" : {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0},
+            "3" : {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0},
+            "4" : {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0},
+            "5" : {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0},
+            "6" : {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0}
+        },
+        "STARS" : {
+            "1" : {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0},
+            "2" : {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0},
+            "3" : {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0},
+            "4" : {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0},
+            "5" : {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0},
+            "6" : {"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0}
+        },
+        "HIGHSCORE" : {
+            "1" : 0,
+            "2" : 0,
+            "3" : 0,
+            "4" : 0,
+            "5" : 0,
+            "6" : 0
+        }
+    }
+}
