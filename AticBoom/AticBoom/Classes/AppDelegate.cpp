@@ -43,10 +43,10 @@ bool AppDelegate::initInstance()
 
 bool AppDelegate::applicationDidFinishLaunching()
 {
-	CCDirector *pDirector = CCDirector::sharedDirector();
+    CCDirector *pDirector = CCDirector::sharedDirector();
     pDirector->setOpenGLView(&CCEGLView::sharedOpenGLView());
     pDirector->enableRetinaDisplay(true);
-	pDirector->setDeviceOrientation(kCCDeviceOrientationPortrait);
+    pDirector->setDeviceOrientation(kCCDeviceOrientationPortrait);
     pDirector->setAnimationInterval(1.0 / 60);
     pDirector->setProjection(CCDirectorProjection2D);
     CocosDenshion::SimpleAudioEngine* engine = CocosDenshion::SimpleAudioEngine::sharedEngine();
@@ -74,9 +74,9 @@ bool AppDelegate::applicationDidFinishLaunching()
     if (CCDirector::sharedDirector()->getWinSizeInPixels().width > 640) {
         Config::sharedConfig()->iPadFix();
     }
-	CCScene *mScene = IntroScene::scene();
-	pDirector->runWithScene(mScene);
-	return true;
+    CCScene *mScene = IntroScene::scene();
+    pDirector->runWithScene(mScene);
+    return true;
 }
 
 void AppDelegate::applicationDidEnterBackground()
@@ -87,7 +87,7 @@ void AppDelegate::applicationDidEnterBackground()
     if(dynamic_cast<GameScene*>(layer)) {
         GameScene* gameScene = (GameScene*) layer;
         if(!gameScene->paused){
-        	gameScene->pause();
+            gameScene->pause();
         }
         else {
             pDirector->pause();
