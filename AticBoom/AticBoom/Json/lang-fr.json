@@ -1,0 +1,64 @@
+{	
+	"again": "Encore",
+	"bestScore": "Meilleur score : %i",
+	"continue": "Toucher pour continuer",
+	"credits": "Crédits",
+	"developers": "Juan Rodríguez (le capitaine) \nFelipe Bascuñán (intendant) \nDanilo González (cannonier) \nClaudio Alvial (second)\nJaime Véliz (menuisier) \nTae Sandoval (menuisier) \nClaudio Retamal (menuisier) \nMarcelo Sánchez (menuisier)\nOrlando Ohmke (artiste maritime)\nCatalina Carlesi (artiste maritime)\nClaudio Vega (musicien) \nNicolás Cortés (musicien) \nCamila Fisher (cuistot) \nPaz Zuñiga (tonnelier) \nCarola Melendez (tonnelier)",
+	"levelDescription": "Niveau %i - %i",
+	"levelDescription2": "Vous avez %i bulle",
+	"levelDescription2Plural": "Vous avez %i bulles",
+	"levelDescription3": "Toucher pour naviguer !",
+	"ghostLevelDescription": "Niveau %i - X",
+	"play": "Jouer",
+	"settings": "Paramètres",
+	"help": "Aide",
+	"menu": "Menu",
+	"moreSkulls": "Vous n'avez\npas dassez de\ndoublons pour\ndéverrouillerce\n    bateau",
+	"musicOn": "Musique activée",
+	"musicOff": "Musique désactivée",
+	"next": "Suivant",
+	"fxOn": "Fx activé",
+	"fxOff": "Fx desactivé",
+	"reset": "Réinitialiser",
+	"yes": "Oui",
+	"no": "Non",
+	"resume": "Reprendre",
+	"score": "Score : %i",
+	"sure": "Êtes-vous sûr ?",
+    "soon": "Plus les niveaux\n    à venir",
+    "comictxt1": "Voici Billy Serpillère,\nun p'tiot\nqui s'charge des corvées;\ny rêve de d'venir\nun grand flibustier",
+    "comictxt2": "Ses acolytes passent\nsouvent leurs nuits\navec bien\ndes 'teilles de rhum",
+    "comictxt3": "Ils ont baissé\nleur attention\net les bombes\nont éclaté\nBilly a l'occase\nde sauver l'bateau",
+    "comictxt4": "Après avoir sauvé\n les bateaux sur l'rivage,\n Billy Serpillère\n est d'venu un vrai pirate",
+    "comictxt5": "Mais il reste bien\n des bateaux à sauver",
+    "unlock": "Déverrouillez\nle jeu complet",
+    "store": "S'il vous\nplaît patienter",
+    "hint-1" : "Tapotez n'importe où\n pour placer une bulle\n \n \n \n ",
+    "hint-2" : "Atteignez ce point pour\n   balancer la bombe",
+    "hint-3" : "",
+    "hint-4" : " Attrapez les doublons pour\n déverrouillerd'autres bateaux",
+    "hint-5" : "Attention à vos bulles",
+    "hint-6" : "Les échelles modifient votre\n      direction actuelle",
+    "hint-7" : "",
+    "hint-8" : "Utilisez la gourde pour\n  éteindre le feu",
+    "hint-9" : "Si vous touchez le feu, la bombe explose",
+    "hint-10" : "Le vent peut vous faire\naccélérer ou vous ralentir",
+    "hint-11" : "Les murs vous barrent\n  le passage",
+    "hint-12" : "La vapeur pousse la\n bulle vers le haut",
+    "hint-13" : "Cet étage n'est pas éclairé,\n      faites attention",
+    "hint-14" : " Ce vaisseau est plus grand\n  qu'il n'en a l'air",
+    "hint-15" : "Attention aux ennemis qui vous barrent la route",
+    "hint-16" : "Évitez le boulet de canon",
+    "hint-17" : "Cet interrupteur active une ou plusieurs échelles",
+    "restore" : "Restaurer IAP"
+
+}	
+	
+	
+	
+	
+	
+	
+	
+	
+	

@@ -1,0 +1,38 @@
+{
+    "worlds" : [{
+                "name" : "Golden Hind",
+                "levels" : 16,
+                "golden" : 0,
+                "world" : 1
+                },
+                {
+                "name" : "Golden Night",
+                "levels" : 16,
+                "golden" : 48,
+                "world" : 2
+                },
+                {
+                "name" : "Queen Anne's Revenge",
+                "levels" : 16,
+                "golden" : 32,
+                "world" : 3
+                },
+                {
+                "name" : "Queen Anne's Night",
+                "levels" : 16,
+                "golden" : 96,
+                "world" : 4
+                },
+                {
+                "name" : "Adventure Gallery",
+                "levels" : 16,
+                "golden" : 64,
+                "world" : 5
+                },
+                {
+                "name" : "Adventure Night",
+                "levels" : 16,
+                "golden" : 144,
+                "world" : 6
+                }]
+}
