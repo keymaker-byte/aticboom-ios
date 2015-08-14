@@ -41,7 +41,6 @@ namespace aticboom {
     };
     
     Fancy::~Fancy(){
-        
     };
     
     void Fancy::initSimpleSprite(){
@@ -51,7 +50,6 @@ namespace aticboom {
         pSprite->setOpacity(0);
         pSprite->setColor(ccc3(255, 255, 255));
         this->addChild(pSprite, 0, HINT_TAG);
-        
         CCLabelBMFont* label;
         CCLabelBMFont* labelShadow;
         switch (this->image) {
@@ -132,13 +130,13 @@ namespace aticboom {
         labelShadow->setColor(ccc3(10, 10, 10));
         labelShadow->setOpacity(0);
         labelShadow->setPosition(CCPoint(labelShadow->getPosition().x + Config::sharedConfig()->SHADOW_TEXT, labelShadow->getPosition().y - Config::sharedConfig()->SHADOW_TEXT));
-        this->addChild(label, 2, HINT_TAG_TEXT); 
+        this->addChild(label, 2, HINT_TAG_TEXT);
         this->addChild(labelShadow, 1, HINT_TAG_SHADOW);
     };
     
     void Fancy::appear(){
         if(!this->shown) {
-            CCSprite* pSprite = (CCSprite *)this->getChildByTag(HINT_TAG);  
+            CCSprite* pSprite = (CCSprite *)this->getChildByTag(HINT_TAG);
             pSprite->runAction(CCFadeIn::actionWithDuration(0.5));
             CCLabelBMFont* label = (CCLabelBMFont *)this->getChildByTag(HINT_TAG_TEXT);
             label->runAction(CCFadeIn::actionWithDuration(0.5));
@@ -150,7 +148,7 @@ namespace aticboom {
     
     void Fancy::dissapear(){
         if(this->shown) {
-            CCSprite* pSprite = (CCSprite *)this->getChildByTag(HINT_TAG); 
+            CCSprite* pSprite = (CCSprite *)this->getChildByTag(HINT_TAG);
             pSprite->runAction(CCFadeOut::actionWithDuration(0.5));
             CCLabelBMFont* label = (CCLabelBMFont *)this->getChildByTag(HINT_TAG_TEXT);
             label->runAction(CCFadeOut::actionWithDuration(0.5));
@@ -159,4 +157,5 @@ namespace aticboom {
         }
         this->shown = false;
     };
+    
 }

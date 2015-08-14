@@ -28,28 +28,28 @@
 
 #include <vector>
 #include <string>
-
 #include "Config.h"
 #include "Music.h"
-
 #include "json.h"
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
-
 #include "json.h"
-
 #include "GameObject.h"
-
 #include "Hud.h"
 
 namespace aticboom {
+    
     class Bubble : public GameObject {
+        
     public:
         Bubble(Json::Value floor, int world);
         ~Bubble();
         
         int state;
         cocos2d::CCPoint touchcoords;
+        cocos2d::CCMutableArray<cocos2d::CCSpriteFrame* >* ANIMATION_BUBBLE_STAY;
+        cocos2d::CCMutableArray<cocos2d::CCSpriteFrame* >* ANIMATION_BUBBLE_UP;
+        cocos2d::CCMutableArray<cocos2d::CCSpriteFrame* >* ANIMATION_BUBBLE_EXPLODE;
         
         void runAnimationAction(cocos2d::CCAction* action);
         void runMovingAction(cocos2d::CCAction* action);
@@ -58,15 +58,12 @@ namespace aticboom {
         void moveUpFinished(CCNode* bubble);
         void changeSpriteSize(float newsize);
         void moveFinished();
-
-        cocos2d::CCMutableArray<cocos2d::CCSpriteFrame* >* ANIMATION_BUBBLE_STAY;
-        cocos2d::CCMutableArray<cocos2d::CCSpriteFrame* >* ANIMATION_BUBBLE_UP;
-        cocos2d::CCMutableArray<cocos2d::CCSpriteFrame* >* ANIMATION_BUBBLE_EXPLODE;
         
     private:
         void initAnimations();
-
+        
     };
+    
 }
 
 #endif

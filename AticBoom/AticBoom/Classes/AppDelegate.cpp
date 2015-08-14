@@ -25,24 +25,19 @@
 
 #include "AppDelegate.h"
 
-
 USING_NS_CC;
 
-AppDelegate::AppDelegate()
-{
+AppDelegate::AppDelegate() {
 }
 
-AppDelegate::~AppDelegate()
-{
+AppDelegate::~AppDelegate() {
 }
 
-bool AppDelegate::initInstance()
-{
+bool AppDelegate::initInstance() {
     return true;
 }
 
-bool AppDelegate::applicationDidFinishLaunching()
-{
+bool AppDelegate::applicationDidFinishLaunching() {
     CCDirector *pDirector = CCDirector::sharedDirector();
     pDirector->setOpenGLView(&CCEGLView::sharedOpenGLView());
     pDirector->enableRetinaDisplay(true);
@@ -79,8 +74,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     return true;
 }
 
-void AppDelegate::applicationDidEnterBackground()
-{
+void AppDelegate::applicationDidEnterBackground() {
     CCDirector *pDirector = CCDirector::sharedDirector();
     CCScene* scene = pDirector->getRunningScene();
     CCLayer* layer = (CCLayer*)scene->getChildByTag(1);
@@ -100,8 +94,7 @@ void AppDelegate::applicationDidEnterBackground()
     }
 }
 
-void AppDelegate::applicationWillEnterForeground()
-{
+void AppDelegate::applicationWillEnterForeground() {
     CCDirector *pDirector = CCDirector::sharedDirector();
     CCScene* scene = pDirector->getRunningScene();
     CCLayer* layer = (CCLayer*)scene->getChildByTag(1);

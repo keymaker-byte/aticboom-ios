@@ -23,7 +23,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-
 #include "Player.h"
 
 namespace aticboom {
@@ -42,7 +41,6 @@ namespace aticboom {
         this->starNumber = 0;
         this->initAnimations();
         this->setTilePosition();
-        
         this->floorsUpNumber = 0;
         this->floorsDownFollow = 0;
         this->floorsUpFollow = 0;
@@ -62,66 +60,56 @@ namespace aticboom {
     
     void Player::initAnimations() {
         char buffer [50];
-        
         sprintf (buffer, PLAYER_FRAME_A.c_str(), 1);
         CCSprite* pSprite = CCSprite::spriteWithSpriteFrameName(buffer);
         this->addChild(pSprite, 2, PLAYER_SPRITE_TAG);
-        
         ANIMATION_PLAYER_RUN = new CCMutableArray<CCSpriteFrame*>();
         for(int i = 1; i <= 15; i++) {
             sprintf (buffer, PLAYER_FRAME_A.c_str(), i);
             CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(buffer);
             ANIMATION_PLAYER_RUN->addObject(frame);
         }
-        
         ANIMATION_PLAYER_STAIR = new CCMutableArray<CCSpriteFrame*>();
         for(int i = 1; i <= 15; i++) {
             sprintf (buffer, PLAYER_FRAME_B.c_str() , i);
             CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(buffer);
             ANIMATION_PLAYER_STAIR->addObject(frame);
         }
-        
         ANIMATION_PLAYER_BUBBLE = new CCMutableArray<CCSpriteFrame*>();
         for(int i = 1; i <= 15; i++) {
             sprintf (buffer, PLAYER_FRAME_D.c_str(), i);
             CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(buffer);
             ANIMATION_PLAYER_BUBBLE->addObject(frame);
         }
-        
         ANIMATION_PLAYER_HOLE = new CCMutableArray<CCSpriteFrame*>();
         for(int i = 1; i <= 15; i++) {
             sprintf (buffer, PLAYER_FRAME_C.c_str(), i);
             CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(buffer);
             ANIMATION_PLAYER_HOLE->addObject(frame);
         }
-        
         ANIMATION_PLAYER_THROW = new CCMutableArray<CCSpriteFrame*>();
         for(int i = 1; i <= 15; i++) {
             sprintf (buffer, PLAYER_FRAME_E.c_str(), i);
             CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(buffer);
             ANIMATION_PLAYER_THROW->addObject(frame);
         }
-        
         ANIMATION_PLAYER_WIN = new CCMutableArray<CCSpriteFrame*>();
         for(int i = 1; i <= 15; i++) {
             sprintf (buffer, PLAYER_FRAME_F.c_str(), i);
             CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(buffer);
             ANIMATION_PLAYER_WIN->addObject(frame);
         }
-        
         ANIMATION_PLAYER_EXPLODE = new CCMutableArray<CCSpriteFrame*>();
         for(int i = 20; i <= 20; i++) {
             sprintf (buffer, PLAYER_FRAME_G.c_str(), i);
             CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(buffer);
             ANIMATION_PLAYER_EXPLODE->addObject(frame);
         }
-        
         CCParticleSystemPoint* smoke = (CCParticleSystemPoint*)CCParticleSystemPoint::particleWithFile(Config::sharedConfig()->PLAYER_PARTICLE_SMOKE.c_str());
         smoke->setPosition( CCPoint(Config::sharedConfig()->TILE_WIDTH * PLAYER_TILES_WIDTH / 4, Config::sharedConfig()->TILE_HEIGHT * PLAYER_TILES_HEIGHT / 4 + Config::sharedConfig()->PLAYER_SMOKE_HEIGHT_MARGEN) );
         this->addChild(smoke, 1, PLAYER_SMOKE_TAG);
-        
         this->runAnimationAction(CCRepeatForever::actionWithAction(CCAnimate::actionWithAnimation(CCAnimation::animationWithFrames(ANIMATION_PLAYER_RUN, 0.06), false)));
-    } 
+    }
     
     void Player::runAnimationAction(CCAction* action) {
         CCSprite* pSprite = (CCSprite*)this->getChildByTag(PLAYER_SPRITE_TAG);
@@ -142,7 +130,6 @@ namespace aticboom {
     void Player::setFlipRight() {
         CCSprite* pSprite = (CCSprite*)this->getChildByTag(PLAYER_SPRITE_TAG);
         pSprite->setFlipX(false);
-        
         CCParticleSystemPoint* smoke = (CCParticleSystemPoint*)this->getChildByTag(PLAYER_SMOKE_TAG);
         smoke->setPosition( CCPoint(Config::sharedConfig()->TILE_WIDTH * PLAYER_TILES_WIDTH / 4, Config::sharedConfig()->TILE_HEIGHT * PLAYER_TILES_HEIGHT / 4 + Config::sharedConfig()->PLAYER_SMOKE_HEIGHT_MARGEN) );
     }
@@ -150,7 +137,6 @@ namespace aticboom {
     void Player::setFlipLeft() {
         CCSprite* pSprite = (CCSprite*)this->getChildByTag(PLAYER_SPRITE_TAG);
         pSprite->setFlipX(true);
-        
         CCParticleSystemPoint* smoke = (CCParticleSystemPoint*)this->getChildByTag(PLAYER_SMOKE_TAG);
         smoke->setPosition( CCPoint(-1 * Config::sharedConfig()->TILE_WIDTH * PLAYER_TILES_WIDTH / 4, Config::sharedConfig()->TILE_HEIGHT * PLAYER_TILES_HEIGHT / 4 + Config::sharedConfig()->PLAYER_SMOKE_HEIGHT_MARGEN) );
     }
@@ -215,9 +201,7 @@ namespace aticboom {
         }
     }
     
-    
-    void Player::moveFinished(CCNode* player)
-    {
+    void Player::moveFinished(CCNode* player) {
         Level* level = (Level *)this->getParent();
         GameScene* gameScene = (GameScene *)level->getParent();
         switch (this->state) {
@@ -248,7 +232,6 @@ namespace aticboom {
                     this->runAnimationAction(CCRepeatForever::actionWithAction(CCAnimate::actionWithAnimation(CCAnimation::animationWithFrames(ANIMATION_PLAYER_RUN, 0.06), false)));
                     this->setFlipRight();
                     this->move();
-                    
                 }
                 break;
             case PLAYER_STATE_RIGHT_BUBBLE_PLUS:
@@ -363,7 +346,6 @@ namespace aticboom {
                 }
                 break;
         }
-        
         if ( checkForFire() ) {
             gameScene->funlose();
         }
@@ -372,7 +354,6 @@ namespace aticboom {
     bool Player::checkForFire() {
         Level* level = (Level *)this->getParent();
         Floor* floor = (Floor *)level->getChildByTag(FLOOR_TAG+this->floor+1);
-        
         if (floor->type == 1) {
             return true;
         } else {
@@ -381,7 +362,7 @@ namespace aticboom {
     }
     
     void Player::clearFloor(int floorNumber) {
-        Level* level = (Level *)this->getParent();        
+        Level* level = (Level *)this->getParent();
         for (int i = 0; i < level->fancyCount; i++) {
             Fancy* fancy = (Fancy *) level->getChildByTag(FANCY_TAG + i);
             if(fancy->floor == floorNumber) {
@@ -389,7 +370,7 @@ namespace aticboom {
             }
         }
     }
-
+    
     bool Player::checkColision() {
         Level* level = (Level *)this->getParent();
         GameScene* gameScene = (GameScene *)level->getParent();
@@ -437,7 +418,7 @@ namespace aticboom {
                     level->mesh->tiles[this->position[0]][this->position[1]].erase(level->mesh->tiles[this->position[0]][this->position[1]].begin() + i);
                     extraBubble->grab();
                     hud->addBubble();
-                    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::fullPathFromRelativePath(SOUND_BUBBLE.c_str())); 
+                    SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::fullPathFromRelativePath(SOUND_BUBBLE.c_str()));
                 }
                 if(dynamic_cast<ExtraRope*>(obj)) {
                     ExtraRope* extraRope = (ExtraRope *) obj;
@@ -449,7 +430,6 @@ namespace aticboom {
                     else {
                         level->time += extraRope->extraTime;
                     }
-                    
                     rope->addRope(level->time);
                     SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::fullPathFromRelativePath(SOUND_PAPER1.c_str()));
                 }
@@ -477,55 +457,52 @@ namespace aticboom {
                 }
                 
                 if(dynamic_cast<Bubble*>(obj) || activateJumpedBubble) {
-                        Bubble * bubble = activateJumpedBubble ? jumpedbubble : (Bubble *) obj;
-                        level->mesh->tiles[this->position[0]][this->position[1]].erase(level->mesh->tiles[this->position[0]][this->position[1]].begin() + i);
-                        switch (this->state) {
-                            case PLAYER_STATE_RIGHT:
-                            case PLAYER_STATE_RIGHT_BUBBLE:
-                            case PLAYER_STATE_RIGHT_BUBBLE_PLUS:
-                            case PLAYER_STATE_RIGHT_HOLE:
-                            case PLAYER_STATE_LEFT_STAIR:
-                                if ( checkForFans() ) {
-                                    bubblePower = 2;
-                                    this->state = PLAYER_STATE_RIGHT_BUBBLE_PLUS;
-                                    if(this->floor == 2 || this->floor == 3|| this->floor == 6 || this->floor == 7) {
-                                        gameScene->scrollUp();
-                                    }
-                                } else {
-                                    this->state = PLAYER_STATE_RIGHT_BUBBLE;
-                                    if(this->floor == 3 || this->floor == 7) {
-                                        gameScene->scrollUp();
-                                    }
+                    Bubble * bubble = activateJumpedBubble ? jumpedbubble : (Bubble *) obj;
+                    level->mesh->tiles[this->position[0]][this->position[1]].erase(level->mesh->tiles[this->position[0]][this->position[1]].begin() + i);
+                    switch (this->state) {
+                        case PLAYER_STATE_RIGHT:
+                        case PLAYER_STATE_RIGHT_BUBBLE:
+                        case PLAYER_STATE_RIGHT_BUBBLE_PLUS:
+                        case PLAYER_STATE_RIGHT_HOLE:
+                        case PLAYER_STATE_LEFT_STAIR:
+                            if ( checkForFans() ) {
+                                bubblePower = 2;
+                                this->state = PLAYER_STATE_RIGHT_BUBBLE_PLUS;
+                                if(this->floor == 2 || this->floor == 3|| this->floor == 6 || this->floor == 7) {
+                                    gameScene->scrollUp();
                                 }
-                                this->runAnimationAction(CCRepeatForever::actionWithAction(CCAnimate::actionWithAnimation(CCAnimation::animationWithFrames(ANIMATION_PLAYER_BUBBLE, 0.06), false)));
-                                
-                                break;
-                            case PLAYER_STATE_LEFT:
-                            case PLAYER_STATE_LEFT_BUBBLE:
-                            case PLAYER_STATE_LEFT_BUBBLE_PLUS:
-                            case PLAYER_STATE_LEFT_HOLE:
-                            case PLAYER_STATE_RIGHT_STAIR:
-                                if ( checkForFans() ) {
-                                    bubblePower = 2;
-                                    this->state = PLAYER_STATE_LEFT_BUBBLE_PLUS;
-                                    if(this->floor == 2 || this->floor == 3|| this->floor == 6 || this->floor == 7) {
-                                        gameScene->scrollUp();
-                                    }
-                                } else {
-                                    this->state = PLAYER_STATE_LEFT_BUBBLE;
-                                    if(this->floor == 3 || this->floor == 7) {
-                                        gameScene->scrollUp();
-                                    }
+                            } else {
+                                this->state = PLAYER_STATE_RIGHT_BUBBLE;
+                                if(this->floor == 3 || this->floor == 7) {
+                                    gameScene->scrollUp();
                                 }
-                                this->runAnimationAction(CCRepeatForever::actionWithAction(CCAnimate::actionWithAnimation(CCAnimation::animationWithFrames(ANIMATION_PLAYER_BUBBLE, 0.06), false)));
-                                break;
-                        }
-                        this->move();
-                        
-                        bubble->moveUp(this->speed,bubblePower);
-                        movingObject =  true;
+                            }
+                            this->runAnimationAction(CCRepeatForever::actionWithAction(CCAnimate::actionWithAnimation(CCAnimation::animationWithFrames(ANIMATION_PLAYER_BUBBLE, 0.06), false)));
+                            break;
+                        case PLAYER_STATE_LEFT:
+                        case PLAYER_STATE_LEFT_BUBBLE:
+                        case PLAYER_STATE_LEFT_BUBBLE_PLUS:
+                        case PLAYER_STATE_LEFT_HOLE:
+                        case PLAYER_STATE_RIGHT_STAIR:
+                            if ( checkForFans() ) {
+                                bubblePower = 2;
+                                this->state = PLAYER_STATE_LEFT_BUBBLE_PLUS;
+                                if(this->floor == 2 || this->floor == 3|| this->floor == 6 || this->floor == 7) {
+                                    gameScene->scrollUp();
+                                }
+                            } else {
+                                this->state = PLAYER_STATE_LEFT_BUBBLE;
+                                if(this->floor == 3 || this->floor == 7) {
+                                    gameScene->scrollUp();
+                                }
+                            }
+                            this->runAnimationAction(CCRepeatForever::actionWithAction(CCAnimate::actionWithAnimation(CCAnimation::animationWithFrames(ANIMATION_PLAYER_BUBBLE, 0.06), false)));
+                            break;
+                    }
+                    this->move();
+                    bubble->moveUp(this->speed,bubblePower);
+                    movingObject =  true;
                 }
-                
                 if(dynamic_cast<Stair*>(obj)) {
                     Stair* stair = (Stair*) obj;
                     if (stair->type == 0) {
@@ -575,7 +552,7 @@ namespace aticboom {
                             break;
                         case PLAYER_STATE_LEFT:
                         case PLAYER_STATE_LEFT_BUBBLE:
-                        case PLAYER_STATE_LEFT_BUBBLE_PLUS:    
+                        case PLAYER_STATE_LEFT_BUBBLE_PLUS:
                         case PLAYER_STATE_LEFT_HOLE:
                         case PLAYER_STATE_RIGHT_STAIR:
                             this->state = PLAYER_STATE_LEFT_HOLE;
@@ -589,7 +566,6 @@ namespace aticboom {
                     this->move();
                     movingObject =  true;
                 }
-                
                 if(dynamic_cast<Wall*>(obj)) {
                     switch (this->state) {
                         case PLAYER_STATE_RIGHT:
@@ -601,38 +577,33 @@ namespace aticboom {
                             this->state = PLAYER_STATE_RIGHT_HOLE;
                             this->runAnimationAction(CCRepeatForever::actionWithAction(CCAnimate::actionWithAnimation(CCAnimation::animationWithFrames(ANIMATION_PLAYER_HOLE, 0.06), false)));
                             SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::fullPathFromRelativePath(SOUND_FALL.c_str()));
-                            break;   
+                            break;
                         case PLAYER_STATE_LEFT:
                             this->setFlipRight();
                             this->state = PLAYER_STATE_RIGHT;
-                            break;                            
+                            break;
                         case PLAYER_STATE_LEFT_BUBBLE:
                         case PLAYER_STATE_LEFT_BUBBLE_PLUS:
                             this->state = PLAYER_STATE_LEFT_HOLE;
                             this->runAnimationAction(CCRepeatForever::actionWithAction(CCAnimate::actionWithAnimation(CCAnimation::animationWithFrames(ANIMATION_PLAYER_HOLE, 0.06), false)));
                             SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::fullPathFromRelativePath(SOUND_FALL.c_str()));
                             break;
-                            
                     }
                     this->move();
                     movingObject =  true;
                 }
-
                 if(dynamic_cast<Enemy*>(obj)) {
                     this->explode();
                     movingObject =  true;
                 }
-                
-            }       
+            }
         }
         return movingObject;
     }
     
-    bool Player::checkForFans()
-    {
+    bool Player::checkForFans() {
         Level* level = (Level *)this->getParent();
         GameObject* obj;
-        
         if(this->position[0] >= 0 && this->position[0] < level->mesh->tileColumns) {
             for(int i = level->mesh->tiles[this->position[0]][this->position[1]].size() - 1; i >= 0; i--) {
                 obj = level->mesh->tiles[this->position[0]][this->position[1]][i];
@@ -640,35 +611,26 @@ namespace aticboom {
                     return true;
                 }
             }
-            
         }
-    
-        return false;     
+        return false;
     }
     
-    void Player::throwBomb(CCNode* player)
-    {
+    void Player::throwBomb(CCNode* player) {
         this->stopAllActions();
         CCSprite* pSprite = (CCSprite*)this->getChildByTag(PLAYER_SPRITE_TAG);
         pSprite->stopAllActions();
-        
         Level* level = (Level *)this->getParent();
         Exit* exit = (Exit *)level->getChildByTag(EXIT_TAG);
         GameScene* gameScene = (GameScene *)level->getParent();
-
         Rope* rope = (Rope *)gameScene->getChildByTag(ROPE_TAG);
         rope->stopRope();
-        
         exit->finish();
-        
         SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::fullPathFromRelativePath(SOUND_SPLASH.c_str()));
         SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::fullPathFromRelativePath(this->hasStar ? SOUND_CELEBRATION1.c_str() : SOUND_CELEBRATION2.c_str()));
-        
         CCFiniteTimeAction* actionPlayerA = CCAnimate::actionWithAnimation(CCAnimation::animationWithFrames(ANIMATION_PLAYER_WIN, 0.06), false);
         CCFiniteTimeAction* actionDone = CCCallFuncN::actionWithTarget(gameScene, callfuncN_selector(GameScene::winLevel));
         CCFiniteTimeAction* actionForever = CCCallFuncN::actionWithTarget(this, callfuncN_selector(Player::laughForever));
         this->runAnimationAction(CCSequence::actions(actionPlayerA, actionDone, actionForever, NULL));
-        
         if(this->hasStar) {
             CCParticleSystemPoint* fireworks = (CCParticleSystemPoint*)CCParticleSystemPoint::particleWithFile(Config::sharedConfig()->PLAYER_PARTICLE_FIREWORKS.c_str());
             fireworks->setPosition( CCPoint(0, PLAYER_TILES_HEIGHT * Config::sharedConfig()->TILE_HEIGHT) );
@@ -676,28 +638,22 @@ namespace aticboom {
         }
     }
     
-    void Player::laughForever(CCNode* player)
-    {
+    void Player::laughForever(CCNode* player) {
         this->runAnimationAction(CCRepeatForever::actionWithAction(CCAnimate::actionWithAnimation(CCAnimation::animationWithFrames(ANIMATION_PLAYER_WIN, 0.06))));
     }
     
-    void Player::explode()
-    {
+    void Player::explode() {
         this->stopAllActions();
         CCSprite* pSprite = (CCSprite*)this->getChildByTag(PLAYER_SPRITE_TAG);
         pSprite->stopAllActions();
-        
         CCParticleSystemPoint* smoke = (CCParticleSystemPoint*)this->getChildByTag(PLAYER_SMOKE_TAG);
         smoke->stopSystem();
-        
         Level* level = (Level *)this->getParent();
         GameScene* gameScene = (GameScene *)level->getParent();
         level->state = LEVEL_STATE_DIE;
         level->reorderChild(this, 7);
-        
         Rope* rope = (Rope *)gameScene->getChildByTag(ROPE_TAG);
         rope->explode();
-        
         CCFiniteTimeAction* scaleA = CCScaleTo::actionWithDuration(0, 0.5);
         CCFiniteTimeAction* scaleB = CCScaleTo::actionWithDuration(0.6, 1);
         CCFiniteTimeAction* actionPlayerA = CCAnimate::actionWithAnimation(CCAnimation::animationWithFrames(ANIMATION_PLAYER_EXPLODE, 0), false);
@@ -707,7 +663,6 @@ namespace aticboom {
         CCFiniteTimeAction* actionDoneB = CCCallFuncN::actionWithTarget(this, callfuncN_selector(Player::fallDown));
         this->runAnimationAction(CCSequence::actions(actionPlayerA, scaleA, scaleB, actionDone, NULL));
         this->runMovingAction( CCSequence::actions(actionMoveCenter, actionDoneB, actionMoveDown, NULL));
-        
         CCParticleSystemPoint* explotion = (CCParticleSystemPoint*)CCParticleSystemPoint::particleWithFile(Config::sharedConfig()->PLAYER_PARTICLE_EXPLODE.c_str());
         explotion->setPosition( CCPoint(0,0) );
         this->addChild(explotion, 0);
@@ -717,13 +672,11 @@ namespace aticboom {
         CCParticleSystemPoint* explotionShip = (CCParticleSystemPoint*)CCParticleSystemPoint::particleWithFile(Config::sharedConfig()->SHIP_PARTICLE_EXPLODE.c_str());
         explotionShip->setPosition(CCPoint(0,0));
         this->addChild(explotionShip, 0);
-        
         SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::fullPathFromRelativePath(SOUND_BOMB.c_str()));
         AticBoomObjC::shared()->vibrate();
     }
     
-    void Player::fallDown(CCNode* player)
-    {
+    void Player::fallDown(CCNode* player) {
         SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::fullPathFromRelativePath(SOUND_SCREEN.c_str()));
     }
     

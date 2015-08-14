@@ -25,8 +25,6 @@
 
 #include "Border.h"
 
-
-
 namespace aticboom {
     using namespace cocos2d;
     
@@ -36,7 +34,6 @@ namespace aticboom {
     };
     
     Border::~Border() {
-        
     };
     
     void Border::initAnimations() {
@@ -49,7 +46,6 @@ namespace aticboom {
         CCSprite* right = CCSprite::spriteWithFile("ipadembed_r1_c3.png");
         right->setPosition(CCPoint(CCDirector::sharedDirector()->getWinSize().width - right->getContentSize().width/2, CCDirector::sharedDirector()->getWinSize().height/2));
         this->addChild(right, 1002);
-        
     }
     
 }

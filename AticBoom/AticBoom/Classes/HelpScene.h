@@ -28,7 +28,6 @@
 
 #include <vector>
 #include <string>
-
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
 #include "CCTouchDispatcher.h"
@@ -40,45 +39,44 @@ using namespace CocosDenshion;
 using namespace std;
 
 namespace aticboom {
-
-class HelpScene : public cocos2d::CCLayer
-{
+    
+    class HelpScene : public cocos2d::CCLayer {
+        
     public:
         HelpScene();
         ~HelpScene();
         virtual bool init();
-    
+        
         static cocos2d::CCScene* scene();
-
-        static HelpScene* node() 
+        static HelpScene* node()
         {
             HelpScene *pRet = new HelpScene();
-            if (pRet && pRet->init()) 
-            { 
-                pRet->autorelease(); 
-                return pRet; 
-            } 
-            else 
-            { 
-                delete pRet; 
-                pRet = NULL; 
-                return NULL; 
-            } 
+            if (pRet && pRet->init())
+            {
+                pRet->autorelease();
+                return pRet;
+            }
+            else
+            {
+                delete pRet;
+                pRet = NULL;
+                return NULL;
+            }
         };
         
-        void backToTitle(); 
+        int currentPage;
+        bool touchEnabled;
+        
+        void backToTitle();
         void onEnter();
         void onExit();
         void prepareNextPage(CCNode* nada);
         void showNextPage(int page);
-    
-        int currentPage;
-        bool touchEnabled;
-
         bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
-    
-    void keyBackClicked();
+        void keyBackClicked();
+        
     };
+    
 }
 
 #endif

@@ -34,10 +34,11 @@
 #include "Config.h"
 
 namespace aticboom {
+    
     class Geometry  {
+        
     public:
-        static cocos2d::CCPoint getTilePosition(int tileX, int tileY, int tilesWidth, int tilesHeight)
-        {
+        static cocos2d::CCPoint getTilePosition(int tileX, int tileY, int tilesWidth, int tilesHeight) {
             int floor = Geometry::getCurrentFloor(tileY);
             return cocos2d::CCPointMake( Config::sharedConfig()->TILE_WIDTH *  (tileX + tilesWidth / 2) + Config::sharedConfig()->SCREEN_WIDTH_MARGEN, Config::sharedConfig()->TILE_HEIGHT * (tileY + (tilesHeight / 2)) + Config::sharedConfig()->FLOOR_HEIGHT_MARGEN - (floor));
         }
@@ -137,7 +138,7 @@ namespace aticboom {
         }
         
         static cocos2d::CCPoint getCloudOrigin(int margin) {
-            int randHeight = (rand()%Config::sharedConfig()->SCREEN_HEIGHT) + 1; 
+            int randHeight = (rand()%Config::sharedConfig()->SCREEN_HEIGHT) + 1;
             if(margin == -1) {
                 margin = (rand()%(Config::sharedConfig()->SCREEN_WIDTH + Config::sharedConfig()->SCREEN_WIDTH_MARGEN)) + 1;
             }
@@ -153,24 +154,20 @@ namespace aticboom {
         
         static cocos2d::CCSprite* makeMenuItem(string buttonLabel) {
             using namespace cocos2d;
-            
             CCSprite* sprite = CCSprite::spriteWithSpriteFrameName(WORLD_BUTTON2.c_str());
             CCLabelBMFont* label = CCLabelBMFont::labelWithString(buttonLabel.c_str(), Config::sharedConfig()->BMFONT_NAME.c_str());
             label->setColor(ccc3(50,50,50));
             label->setPosition(CCPoint(Config::sharedConfig()->MENU_BUTTON_WIDTH/2, Config::sharedConfig()->MENU_BUTTON_HEIGHT/2));
             Geometry::curveText(label);
-            sprite->addChild(label, 0, 1);            
-            
+            sprite->addChild(label, 0, 1);
             return sprite;
         }
         
         static bool nodeContainsTouch(cocos2d::CCNode* node, cocos2d::CCPoint touch) {
             using namespace cocos2d;
-            
             if(CCRect::CCRectContainsPoint(CCRectMake(node->getPosition().x - node->getContentSize().width /2, node->getPosition().y - node->getContentSize().height / 2, node->getContentSize().width, node->getContentSize().height), touch)) {
                 return true;
             }
-            
             return false;
         }
         
@@ -184,7 +181,6 @@ namespace aticboom {
                     PChar->setPosition(CCPoint( PChar->getPosition().x,PChar->getPosition().y+(pow(label->getChildrenCount()/2,1.5)-pow(i,1.5))*label->getScale()/2));
                 }
             }
-            
         }
         
         static bool isNight(int worldId) {
@@ -194,8 +190,7 @@ namespace aticboom {
             return false;
         }
     };
+    
 }
-
-
 
 #endif

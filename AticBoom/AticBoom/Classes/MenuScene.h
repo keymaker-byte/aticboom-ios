@@ -28,7 +28,6 @@
 
 #include <vector>
 #include <string>
-
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
 #include "CCTouchDispatcher.h"
@@ -46,32 +45,30 @@ using namespace cocos2d;
 using namespace CocosDenshion;
 using namespace std;
 
-
-//Escena del titulo
-class MenuScene : public cocos2d::CCLayer
-{
+class MenuScene : public cocos2d::CCLayer {
+    
 public:
     MenuScene();
     ~MenuScene();
-	virtual bool init();
+    virtual bool init();
     
-	static cocos2d::CCScene* scene();
-    
-    static MenuScene* node() 
+    static cocos2d::CCScene* scene();
+    static MenuScene* node()
     {
         MenuScene *pRet = new MenuScene();
-        if (pRet && pRet->init()) 
-        { 
-            pRet->autorelease(); 
-            return pRet; 
-        } 
-        else 
-        { 
-            delete pRet; 
-            pRet = NULL; 
-            return NULL; 
-        } 
+        if (pRet && pRet->init())
+        {
+            pRet->autorelease();
+            return pRet;
+        }
+        else
+        {
+            delete pRet;
+            pRet = NULL;
+            return NULL;
+        }
     };
+    
     bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
     void startAticGame(CCObject* pSender);
     void goToSettings(CCObject* pSender);
@@ -81,7 +78,6 @@ public:
     void onEnter();
     void onExit();
     void keyBackClicked();
-    
     
 };
 

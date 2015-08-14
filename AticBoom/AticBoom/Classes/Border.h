@@ -28,20 +28,20 @@
 
 #include <vector>
 #include <string>
-
 #include "cocos2d.h"
 
-
 namespace aticboom {
+    
     class Border : public cocos2d::CCNode {
+        
     public:
         Border();
         ~Border();
-    
+        
     private:
         void initAnimations();
+        
     };
 }
-
 
 #endif

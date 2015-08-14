@@ -25,7 +25,6 @@
 
 #include "Fan.h"
 
-//TODO THIS CLASS NEED REFACTORING
 namespace aticboom {
     
     using namespace cocos2d;
@@ -34,22 +33,18 @@ namespace aticboom {
     Fan::Fan(Json::Value fan, int world) : Fan::GameObject(fan, world) {
         this->tileWidth = FAN_TILES_WIDTH;
         this->tileHeight = FAN_TILES_HEIGHT;
-        this->initParticles(); 
+        this->initParticles();
         this->setTilePosition();
     };
     
     Fan::~Fan() {
-        
     };
     
     void Fan::initParticles() {
-        
         CCParticleSystemPoint* wind = (CCParticleSystemPoint*)CCParticleSystemPoint::particleWithFile(Config::sharedConfig()->FAN_PARTICLE_PLIST.c_str());
         wind->setPosition(CCPoint(0,0));
         wind->setPositionType(kCCPositionTypeRelative);
         this->addChild(wind, 3, FAN_SHINE_TAG);
-    
     }
-       
     
 }

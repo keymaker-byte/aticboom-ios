@@ -26,25 +26,21 @@
 #ifndef AticBoom_ExtraBubble_h
 #define AticBoom_ExtraBubble_h
 
-
 #include <vector>
 #include <string>
-
 #include "Config.h"
 #include "Music.h"
-
 #include "json.h"
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
-
 #include "json.h"
-
 #include "GameObject.h"
-
 #include "Hud.h"
 
 namespace aticboom {
+    
     class ExtraBubble : public GameObject {
+        
     public:
         ExtraBubble(Json::Value floor, int world);
         ~ExtraBubble();
@@ -55,10 +51,12 @@ namespace aticboom {
         
         cocos2d::CCMutableArray<cocos2d::CCSpriteFrame* >* ANIMATION_EXTRA_BUBBLE_STAY;
         cocos2d::CCMutableArray<cocos2d::CCSpriteFrame* >* ANIMATION_EXTRA_BUBBLE_GRAB;
+        
     private:
         void initAnimations();
         
     };
+    
 }
 
 

@@ -26,20 +26,17 @@
 #ifndef AticBoom_Hole_h
 #define AticBoom_Hole_h
 
-
 #include <vector>
 #include <string>
-
 #include "Config.h"
-
 #include "json.h"
 #include "cocos2d.h"
-
 #include "GameObject.h"
 
 namespace aticboom {
-    class Hole: public GameObject 
-    {
+    
+    class Hole: public GameObject {
+        
     public:
         Hole(Json::Value floor, int world);
         ~Hole();
@@ -51,7 +48,9 @@ namespace aticboom {
         
     private:
         void initAnimations();
+        
     };
+    
 }
 
 #endif

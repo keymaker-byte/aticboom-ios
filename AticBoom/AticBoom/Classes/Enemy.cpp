@@ -29,12 +29,11 @@ namespace aticboom {
     
     using namespace cocos2d;
     
-    Enemy::Enemy(Json::Value enemy, int world) : Enemy::GameObject(enemy, world){
+    Enemy::Enemy(Json::Value enemy, int world) : Enemy::GameObject(enemy, world) {
         this->speed = enemy["speed"].asDouble();
         this->tileWidth = ENEMY_TILES_WIDTH;
         this->tileHeight = ENEMY_TILES_HEIGHT;
         this->state = ENEMY_STATE_RIGHT;
-        //this->floor = 0;
         this->initAnimations();
         this->setTilePosition();
     };
@@ -45,24 +44,20 @@ namespace aticboom {
     
     void Enemy::initAnimations() {
         char buffer [50];
-        
         CCSpriteBatchNode* batch = CCSpriteBatchNode::batchNodeWithFile(ENEMY_PNG.c_str(), 120);
         CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile(ENEMY_PLIST.c_str());
         this->addChild(batch);
-        
         sprintf (buffer, ENEMY_FRAME_A.c_str(), 1);
         CCSprite* pSprite = CCSprite::spriteWithSpriteFrameName(buffer);
         this->addChild(pSprite, 2, ENEMY_SPRITE_TAG);
-        
         ANIMATION_ENEMY_RUN = new CCMutableArray<CCSpriteFrame*>();
         for(int i = 1; i <= 30; i++) {
             sprintf (buffer, ENEMY_FRAME_A.c_str(), i);
             CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(buffer);
             ANIMATION_ENEMY_RUN->addObject(frame);
         }
-        
         this->runAnimationAction(CCRepeatForever::actionWithAction(CCAnimate::actionWithAnimation(CCAnimation::animationWithFrames(ANIMATION_ENEMY_RUN, 0.03), false)));
-    } 
+    }
     
     void Enemy::runAnimationAction(CCAction* action) {
         CCSprite* pSprite = (CCSprite*)this->getChildByTag(ENEMY_SPRITE_TAG);
@@ -97,26 +92,23 @@ namespace aticboom {
         switch (this->state) {
             case ENEMY_STATE_RIGHT:
                 if ( safeToMove(this->position[0], this->position[1]) ) {
-                actionMove = CCMoveTo::actionWithDuration( this->speed, Geometry::getTilePosition(this->position[0] + 1, this->position[1], this->tileWidth, this->tileHeight));
-                actionMoveDone = CCCallFuncN::actionWithTarget(this, callfuncN_selector(Enemy::moveFinished));
-                this->runMovingAction( CCSequence::actions(actionMove, actionMoveDone, NULL) );
+                    actionMove = CCMoveTo::actionWithDuration( this->speed, Geometry::getTilePosition(this->position[0] + 1, this->position[1], this->tileWidth, this->tileHeight));
+                    actionMoveDone = CCCallFuncN::actionWithTarget(this, callfuncN_selector(Enemy::moveFinished));
+                    this->runMovingAction( CCSequence::actions(actionMove, actionMoveDone, NULL) );
                 }
                 break;
             case ENEMY_STATE_LEFT:
                 if ( safeToMove(this->position[0], this->position[1]) ) {
-                actionMove = CCMoveTo::actionWithDuration( this->speed, Geometry::getTilePosition(this->position[0] - 1, this->position[1], this->tileWidth, this->tileHeight));
-                actionMoveDone = CCCallFuncN::actionWithTarget(this, callfuncN_selector(Enemy::moveFinished));
-                this->runMovingAction( CCSequence::actions(actionMove, actionMoveDone, NULL) );
+                    actionMove = CCMoveTo::actionWithDuration( this->speed, Geometry::getTilePosition(this->position[0] - 1, this->position[1], this->tileWidth, this->tileHeight));
+                    actionMoveDone = CCCallFuncN::actionWithTarget(this, callfuncN_selector(Enemy::moveFinished));
+                    this->runMovingAction( CCSequence::actions(actionMove, actionMoveDone, NULL) );
                 }
                 break;
         }
-        
     }
     
     
-    void Enemy::moveFinished(CCNode* enemy)
-    {   
-
+    void Enemy::moveFinished(CCNode* enemy) {
         switch (this->state) {
             case ENEMY_STATE_RIGHT:
                 this->position[0]++;
@@ -125,7 +117,6 @@ namespace aticboom {
                 this->position[0]--;
                 break;
         }
-        
         updateGridPosition();
     }
     
@@ -151,13 +142,13 @@ namespace aticboom {
                             this->state = ENEMY_STATE_RIGHT;
                             this->setFlipRight();
                             break;
-                    }                  
+                    }
                     this->move();
                     safe = false;
-                } 
+                }
             }
         }
-        return safe;        
+        return safe;
     }
     
     void Enemy::updateGridPosition(){
@@ -165,14 +156,12 @@ namespace aticboom {
         GameObject* obj;
         int leftTile = this->position[0]-ENEMY_TILES_RANGE;
         int rightTile = this->position[0]+ENEMY_TILES_RANGE;
-
         if (this->state == ENEMY_STATE_LEFT) {
             if ( (rightTile >= 0) && (rightTile < level->mesh->tileColumns) ) {
                 for(int i = level->mesh->tiles[rightTile][this->position[1]].size() - 1; i >= 0; i--) {
                     obj = level->mesh->tiles[rightTile][this->position[1]][i];
-                    
                     if(dynamic_cast<Enemy*>(obj)) {
-                        level->mesh->tiles[rightTile][this->position[1]].erase(level->mesh->tiles[rightTile][this->position[1]].begin() + i);          
+                        level->mesh->tiles[rightTile][this->position[1]].erase(level->mesh->tiles[rightTile][this->position[1]].begin() + i);
                     }
                 }
             }
@@ -183,15 +172,15 @@ namespace aticboom {
             if ( (leftTile >= 0) && (leftTile < level->mesh->tileColumns) ) {
                 for(int i = level->mesh->tiles[leftTile][this->position[1]].size() - 1; i >= 0; i--) {
                     obj = level->mesh->tiles[leftTile][this->position[1]][i];
-                    
                     if(dynamic_cast<Enemy*>(obj)) {
-                        level->mesh->tiles[leftTile][this->position[1]].erase(level->mesh->tiles[leftTile][this->position[1]].begin() + i);          
+                        level->mesh->tiles[leftTile][this->position[1]].erase(level->mesh->tiles[leftTile][this->position[1]].begin() + i);
                     }
                 }
             }
-            if ( (rightTile >= 0) && (rightTile < level->mesh->tileColumns) ) {        
+            if ( (rightTile >= 0) && (rightTile < level->mesh->tileColumns) ) {
                 level->mesh->tiles[rightTile][this->position[1]].push_back(this);
             }
         }
     }
+    
 }

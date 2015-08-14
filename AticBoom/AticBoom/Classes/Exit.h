@@ -28,17 +28,15 @@
 
 #include <vector>
 #include <string>
-
 #include "Config.h"
-
 #include "json.h"
 #include "cocos2d.h"
-
 #include "GameObject.h"
 
 namespace aticboom {
-    class Exit : public GameObject
-    {
+   
+    class Exit : public GameObject {
+        
     public:
         Exit(Json::Value floor, int world);
         ~Exit();
@@ -46,16 +44,17 @@ namespace aticboom {
         void runAnimationAction(cocos2d::CCAction* action);
         void runMovingAction(cocos2d::CCAction* action);
         void hide();
+        void finish();
         
         cocos2d::CCMutableArray<cocos2d::CCSpriteFrame* >* ANIMATION_EXIT_NORMAL;
         cocos2d::CCMutableArray<cocos2d::CCSpriteFrame* >* ANIMATION_EXIT_FINISH;
         cocos2d::CCMutableArray<cocos2d::CCSpriteFrame* >* ANIMATION_EXIT_END;
         
-        void finish();
-        
     private:
         void initAnimations();
+        
     };
+    
 }
 
 #endif

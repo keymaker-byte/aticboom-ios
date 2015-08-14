@@ -25,8 +25,6 @@
 
 #include "Hud.h"
 
-
-
 namespace aticboom {
     using namespace cocos2d;
     using namespace CocosDenshion;
@@ -46,29 +44,23 @@ namespace aticboom {
     };
     
     void Hud::initAnimations() {
-        
         CCSprite* wood = CCSprite::spriteWithSpriteFrameName(HUD_WOODBUBBLE_PNG.c_str());
         wood->setPosition(CCPoint(wood->getPosition().x, - wood->getContentSize().height/4));
         this->addChild(wood, 2);
-        
         CCSprite* woodback = CCSprite::spriteWithSpriteFrameName(HUD_WOODBACK_PNG.c_str());
         woodback->setPosition(CCPoint(wood->getPosition().x, wood->getPosition().y));
         this->addChild(woodback, 1);
-        
         CCLabelBMFont *bublleNumberLabel = CCLabelBMFont::labelWithString("0", Config::sharedConfig()->BMFONT_NAME.c_str());
         bublleNumberLabel->setPosition(CCPoint(wood->getPosition().x, wood->getPosition().y));
         bublleNumberLabel->setScale(1.1);
         bublleNumberLabel->setOpacity(200);
         this->addChild(bublleNumberLabel, 3, HUD_BUBLENUMBER_TAG);
-        
         CCSprite* preload = CCSprite::spriteWithSpriteFrameName(HUD_RELOAD_PNG.c_str());
         preload->setPosition( CCPoint(- Config::sharedConfig()->SCREEN_WIDTH/2 + Config::sharedConfig()->HUD_TEXT_MARGEN + HUD_TILES_ITEM * Config::sharedConfig()->TILE_WIDTH * 5+ Config::sharedConfig()->WOOD_OBJECT_MARGEN,0) );
-        this->addChild(preload, 3, RELOAD_TAG); 
-        
+        this->addChild(preload, 3, RELOAD_TAG);
         CCSprite* ppause = CCSprite::spriteWithSpriteFrameName(HUD_PAUSE_PNG.c_str());
         ppause->setPosition( CCPoint(- Config::sharedConfig()->SCREEN_WIDTH/2 + Config::sharedConfig()->HUD_TEXT_MARGEN + HUD_TILES_ITEM * Config::sharedConfig()->TILE_WIDTH * 6+ Config::sharedConfig()->WOOD_OBJECT_MARGEN + Config::sharedConfig()->WOOD_OBJECT_MARGEN, 0) );
-        this->addChild(ppause, 3, PAUSE_TAG);     
-
+        this->addChild(ppause, 3, PAUSE_TAG);
         int starSpace = 0;
         for(int i = 1; i <= 3; i++) {
             CCSprite* starSprite = CCSprite::spriteWithSpriteFrameName(HUD_STAR_PNG.c_str());
@@ -77,24 +69,19 @@ namespace aticboom {
             this->addChild(starSprite, 3, COIN_TAG + i);
             starSpace += Config::sharedConfig()->HUD_STAR_SEPARATOR;
         }
-        
         char buffer [50];
         sprintf (buffer, HUD_BUBLEMETTER.c_str(), 1);
         CCSprite* pSprite = CCSprite::spriteWithSpriteFrameName(buffer);
         pSprite->setColor(ccc3(100, 100, 180));
         this->addChild(pSprite, 1, BUBBLELIQUID_SPRITE_TAG);
         pSprite->setPosition(CCPoint(pSprite->getPosition().x, - pSprite->getContentSize().height/4));
-        
-        
         for(int i = 1; i <= 30; i++) {
             ANIMATION_BUBBLELIQUID[i-1] = new CCMutableArray<CCSpriteFrame*>();
             sprintf (buffer, HUD_BUBLEMETTER.c_str(), i);
             CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(buffer);
             ANIMATION_BUBBLELIQUID[i-1]->addObject(frame);
         }
-        
         pSprite->runAction(CCAnimate::actionWithAnimation(CCAnimation::animationWithFrames(ANIMATION_BUBBLELIQUID[0], 0.1), false));
-        
     }
     
     void Hud::setStarNumber(int number) {
@@ -117,29 +104,21 @@ namespace aticboom {
         if(this->bubbleSize == this->totalBubble) {
             return;
         }
-        
         this->bubbleSize++;
-        
         CCSprite* pSprite = (CCSprite*)this->getChildByTag(BUBBLELIQUID_SPRITE_TAG);
         int index = 29 - 29 * this->bubbleSize / this->totalBubble;
         pSprite->runAction(CCAnimate::actionWithAnimation(CCAnimation::animationWithFrames(ANIMATION_BUBBLELIQUID[index], 0.1), false));
-        
         CCLabelBMFont *bublleNumberLabel = (CCLabelBMFont*)this->getChildByTag(HUD_BUBLENUMBER_TAG);
         char buffer[50];
         sprintf(buffer, "%i", this->bubbleSize);
         bublleNumberLabel->setString(buffer);
     }
     
-    
-    
-    
     void Hud::killBubble() {
         this->bubbleSize--;
-        
         CCSprite* pSprite = (CCSprite*)this->getChildByTag(BUBBLELIQUID_SPRITE_TAG);
         int index = 29 - 29 * this->bubbleSize / this->totalBubble;
         pSprite->runAction(CCAnimate::actionWithAnimation(CCAnimation::animationWithFrames(ANIMATION_BUBBLELIQUID[index], 0.1), false));
-        
         CCLabelBMFont *bublleNumberLabel = (CCLabelBMFont*)this->getChildByTag(HUD_BUBLENUMBER_TAG);
         char buffer[50];
         sprintf(buffer, "%i", this->bubbleSize);

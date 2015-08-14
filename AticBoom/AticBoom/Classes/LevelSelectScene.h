@@ -29,7 +29,6 @@
 #include <vector>
 #include <string>
 #include <assert.h>
-
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
 #include "CCTouchDispatcher.h"
@@ -44,46 +43,43 @@ using namespace cocos2d;
 using namespace CocosDenshion;
 using namespace std;
 
-//Escena de seleccion
-class LevelSelectScene : public cocos2d::CCLayer
-{
+class LevelSelectScene : public cocos2d::CCLayer {
+    
 public:
     LevelSelectScene();
     ~LevelSelectScene();
-	virtual bool init();
+    virtual bool init();
     
-	static cocos2d::CCScene* scene(int worldId);
-    
-    static LevelSelectScene* node(int worldId) 
+    static cocos2d::CCScene* scene(int worldId);
+    static LevelSelectScene* node(int worldId)
     {
         LevelSelectScene *pRet = new LevelSelectScene();
         pRet->worldId = worldId;
-        if (pRet && pRet->init()) 
-        { 
-            pRet->autorelease(); 
-            return pRet; 
-        } 
-        else 
-        { 
-            delete pRet; 
-            pRet = NULL; 
-            return NULL; 
-        } 
+        if (pRet && pRet->init())
+        {
+            pRet->autorelease();
+            return pRet;
+        }
+        else
+        {
+            delete pRet;
+            pRet = NULL;
+            return NULL;
+        }
     };
-    
-    bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
     
     int worldId;
     int levelId;
     bool cleanAfterExit;
-    
     int states[aticboom::LEVELS_PER_WORLD];
     
+    bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
     void goToWorld(CCObject* pSender);
     void goToLevel(CCObject* pSender);
     void onEnter();
     void onExit();
     void keyBackClicked();
+    
 };
 
 #endif

@@ -30,13 +30,7 @@
 
 namespace aticboom {
     
-    
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_QNX)
-    static string SOUND_FORMAT = ".ogg";
-#else
     static string SOUND_FORMAT = ".mp3";
-#endif
-    
     static string SOUND_BUBBLE = std::string("bubble").append(SOUND_FORMAT);
     static string SOUND_POP = std::string("pop").append(SOUND_FORMAT);
     static string SOUND_UP = std::string("up").append(SOUND_FORMAT);
@@ -47,21 +41,17 @@ namespace aticboom {
     static string SOUND_FAN = std::string("fan").append(SOUND_FORMAT);
     static string SOUND_SPLASH = std::string("splash").append(SOUND_FORMAT);
     static string SOUND_LOGO = std::string("logo").append(SOUND_FORMAT);
-    
     static string SOUND_PAPER1 = std::string("paper1").append(SOUND_FORMAT);
     static string SOUND_PAPER2 = std::string("paper2").append(SOUND_FORMAT);
     static string SOUND_PAPER3 = std::string("paper3").append(SOUND_FORMAT);
     static string SOUND_SCREEN = std::string("screen").append(SOUND_FORMAT);
     static string SOUND_KNIFE = std::string("paso2").append(SOUND_FORMAT);
-    
     static string SOUND_CELEBRATION1 = std::string("celebration2").append(SOUND_FORMAT);
     static string SOUND_CELEBRATION2 = std::string("celebration1").append(SOUND_FORMAT);
-    
     static string MUSIC_MENU = std::string("music1").append(SOUND_FORMAT);
     static string MUSIC_LEVEL1 = std::string("music2").append(SOUND_FORMAT);
     static string MUSIC_LEVEL2 = std::string("music3").append(SOUND_FORMAT);
     
 }
-
 
 #endif

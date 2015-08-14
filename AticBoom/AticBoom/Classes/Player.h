@@ -26,17 +26,13 @@
 #ifndef AticBoom_Player_h
 #define AticBoom_Player_h
 
-
 #include <vector>
 #include <string>
-
 #include "Config.h"
 #include "Music.h"
-
 #include "json.h"
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
-
 #include "GameObject.h"
 #include "Bubble.h"
 #include "ExtraBubble.h"
@@ -45,28 +41,27 @@
 #include "Button.h"
 
 namespace aticboom {
-    class Player : public GameObject
-    {
+    
+    class Player : public GameObject {
+        
     public:
         Player(Json::Value player, int world);
         ~Player();
+        
         int state;
         int floor;
         bool hasKey;
         bool hasStar;
         int starNumber;
         double speed;
-        
         int floorsUpNumber;
         int floorsDownFollow;
         int floorsUpFollow;
         bool floorsDownFollowOk;
         bool floorsUpFollowOk;
         
-            
         void setFlipRight();
         void setFlipLeft();
-        
         void runAnimationAction(cocos2d::CCAction* action);
         void runMovingAction(cocos2d::CCAction* action);
         void hide();
@@ -91,7 +86,9 @@ namespace aticboom {
         
     private:
         void initAnimations();
+        
     };
+    
 }
 
 #endif

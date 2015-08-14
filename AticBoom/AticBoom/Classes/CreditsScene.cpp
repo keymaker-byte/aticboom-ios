@@ -26,85 +26,63 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-
 #include "CreditsScene.h"
 
-CreditsScene::CreditsScene() : CreditsScene::CCLayer()
-{
-	
+CreditsScene::CreditsScene() : CreditsScene::CCLayer() {
 }
 
-CreditsScene::~CreditsScene()
-{
-	
+CreditsScene::~CreditsScene() {
 }
 
-void CreditsScene::onEnter()
-{
+void CreditsScene::onEnter() {
     CCLayer::onEnter();
 }
 
-void CreditsScene::onExit()
-{
+void CreditsScene::onExit() {
     CCLayer::onExit();
-    
     CCSpriteBatchNode* batch = (CCSpriteBatchNode*)this->getChildByTag(BATCH_MENU_TAG);
     this->removeChildByTag(BATCH_MENU_TAG, true);
     batch->release();
-
     CCTouchDispatcher::sharedDispatcher()->removeDelegate(this);
 }
 
-void CreditsScene::keyBackClicked()
-{
+void CreditsScene::keyBackClicked() {
     this->backToTitle(NULL);
 }
 
-CCScene* CreditsScene::scene()
-{
+CCScene* CreditsScene::scene() {
     CCScene *scene = CCScene::node();
-	CreditsScene *layer = CreditsScene::node();
-	scene->addChild(layer, 0, 1);
-	return scene;
+    CreditsScene *layer = CreditsScene::node();
+    scene->addChild(layer, 0, 1);
+    return scene;
 }
 
-bool CreditsScene::init()
-{
-	if ( !CCLayer::init() )
-	{
-		return false;
-	}
-    
+bool CreditsScene::init() {
+    if ( !CCLayer::init() ) {
+        return false;
+    }
     this->setIsKeypadEnabled(true);
-    
     CCDirector::sharedDirector()->resume();
-
     CCSpriteBatchNode* batch = new CCSpriteBatchNode();
     batch->initWithTexture(CCTextureCache::sharedTextureCache()->textureForKey(Config::sharedConfig()->MENU_PNG.c_str()), 28);
     this->addChild(batch, 0, BATCH_MENU_TAG);
-    
     CCSprite* seaSprite = CCSprite::spriteWithSpriteFrameName(WORLD_SELECT_BG.c_str());
     seaSprite->setPosition(Geometry::getScreenCenter());
     this->addChild(seaSprite, 1);
-    
     CCParticleSystemPoint* shine = (CCParticleSystemPoint*)CCParticleSystemPoint::particleWithFile(Config::sharedConfig()->WORLD_BURNING_PARTICLE.c_str());
     shine->setPosition( Geometry::getScreenCenter() );
     this->addChild(shine, 1);
-    
     CCLabelBMFont* lTitle = CCLabelBMFont::labelWithString(Config::sharedConfig()->LANG_CREDITS.c_str(), Config::sharedConfig()->BMFONT_NAME.c_str());
     lTitle->setScale(Config::sharedConfig()->FONT_SCALE);
     lTitle->setColor(ccc3(255,255,255));
     lTitle->setPosition(Geometry::getScreenUpCenter(Config::sharedConfig()->SETTING_MARGIN_TOP));
     this->addChild(lTitle,11);
-    
     CCSprite* wood = CCSprite::spriteWithSpriteFrameName(WOOD_PNG.c_str());
     wood->setPosition(Geometry::getScreenUpCenter(Config::sharedConfig()->WOOD_MARGEN));
     this->addChild(wood, 10, WOOD_TAG);
-    
     CCSprite* pBackToMenu = CCSprite::spriteWithSpriteFrameName(WORLD_SELECT_BACK.c_str());
-	pBackToMenu->setPosition( CCPoint(Config::sharedConfig()->MENU_WORLD_ARROW_MARGEN * 17, Config::sharedConfig()->MENU_WORLD_ARROW_MARGEN) );
-	wood->addChild(pBackToMenu, 11, BUTTON5_TAG); 
-    
+    pBackToMenu->setPosition( CCPoint(Config::sharedConfig()->MENU_WORLD_ARROW_MARGEN * 17, Config::sharedConfig()->MENU_WORLD_ARROW_MARGEN) );
+    wood->addChild(pBackToMenu, 11, BUTTON5_TAG);
     CCNode* textNode = CCNode::node();
     stringstream ss(Config::sharedConfig()->LANG_DEVELOPERS);
     string s;
@@ -121,7 +99,6 @@ bool CreditsScene::init()
         textNode->addChild(lCredits,3);
     }
     this->addChild(textNode, 3);
-    
     for (int i = 0; i < 20; i++) {
         int cloudType = (rand()%3) + 1;
         CCSprite* cloud;
@@ -142,29 +119,23 @@ bool CreditsScene::init()
         if((rand()%1) + 1) {
             cloud->setFlipX(true);
         }
-        
         int randSpeed = (rand()%40)+10;
         cloud->setPosition(Geometry::getCloudOrigin(-1));
-        //move cloud
-        CCFiniteTimeAction* actionMove = CCMoveTo::actionWithDuration(randSpeed,Geometry::getCloudEnd(cloud->getContentSize().width, cloud->getPosition().y)); 
+        CCFiniteTimeAction* actionMove = CCMoveTo::actionWithDuration(randSpeed,Geometry::getCloudEnd(cloud->getContentSize().width, cloud->getPosition().y));
         CCFiniteTimeAction* actionMoveDone = CCCallFuncN::actionWithTarget( cloud, callfuncN_selector(CreditsScene::reloopCloud));
-        cloud->runAction( CCSequence::actions(actionMove, actionMoveDone, NULL) );  
+        cloud->runAction( CCSequence::actions(actionMove, actionMoveDone, NULL) );
         this->addChild(cloud,2);
     }
-    
     CCTouchDispatcher::sharedDispatcher()->addTargetedDelegate(this, 0, true);
-    
     //ipad fix
     if(CCDirector::sharedDirector()->getWinSizeInPixels().width >= 768) {
         Border* border = new Border();
         this->addChild(border, 999);
     }
-    
-	return true;
+    return true;
 }
 
-void CreditsScene::backToTitle(CCObject* pSender)
-{
+void CreditsScene::backToTitle(CCObject* pSender) {
     SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::fullPathFromRelativePath(SOUND_PAPER2.c_str()));
     CCDirector::sharedDirector()->replaceScene(CCTransitionFade::transitionWithDuration(0.5, MenuScene::scene()));
 }
@@ -179,16 +150,14 @@ bool CreditsScene::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent) {
         this->backToTitle(pBackToMenu);
         return true;
     }
-    
     return false;
 }
 
-void CreditsScene::reloopCloud(CCNode* cloudObj)
-{
-	CCSprite* cloud = (CCSprite*)cloudObj;
+void CreditsScene::reloopCloud(CCNode* cloudObj) {
+    CCSprite* cloud = (CCSprite*)cloudObj;
     int randSpeed = (rand()%40)+10;
     cloud->setPosition(Geometry::getCloudOrigin(0));
-    CCFiniteTimeAction* actionMove = CCMoveTo::actionWithDuration(randSpeed,Geometry::getCloudEnd(cloud->getContentSize().width, cloud->getPosition().y)); 
+    CCFiniteTimeAction* actionMove = CCMoveTo::actionWithDuration(randSpeed,Geometry::getCloudEnd(cloud->getContentSize().width, cloud->getPosition().y));
     CCFiniteTimeAction* actionMoveDone = CCCallFuncN::actionWithTarget( cloud, callfuncN_selector(MenuScene::reloopCloud));
-    cloud->runAction( CCSequence::actions(actionMove, actionMoveDone, NULL) );    
+    cloud->runAction( CCSequence::actions(actionMove, actionMoveDone, NULL) );
 }

@@ -34,7 +34,7 @@ namespace aticboom {
         this->tileWidth = KEY_TILES_WIDTH;
         this->tileHeight = KEY_TILES_HEIGHT;
         this->floorIndex = key["floorIndex"].asInt();
-        this->initAnimations(); 
+        this->initAnimations();
         this->setTilePosition();
     };
     
@@ -45,33 +45,26 @@ namespace aticboom {
     
     void Key::initAnimations() {
         char buffer [50];
-        
-        //init a sprite
         sprintf (buffer, KEY_FRAME_A.c_str(), 1);
         CCSprite* pSprite = CCSprite::spriteWithSpriteFrameName(buffer);
         this->addChild(pSprite,1,KEY_SPRITE_TAG);
-        
         ANIMATION_KEY_STAY = new CCMutableArray<CCSpriteFrame*>();
         for(int i = 1; i <= 30; i++) {
             sprintf (buffer, KEY_FRAME_A.c_str(), i);
             CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(buffer);
             ANIMATION_KEY_STAY->addObject(frame);
         }
-        
         ANIMATION_KEY_GRAB = new CCMutableArray<CCSpriteFrame*>();
         for(int i = 1; i <= 30; i++) {
             sprintf (buffer, KEY_FRAME_B.c_str(), i);
             CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(buffer);
             ANIMATION_KEY_GRAB->addObject(frame);
         }
-
         CCParticleSystemPoint* shine = (CCParticleSystemPoint*)CCParticleSystemPoint::particleWithFile(Config::sharedConfig()->PARTICLE_SHINE.c_str());
         shine->setPosition( CCPoint(0,0) );
         shine->setPositionType(kCCPositionTypeRelative);
         this->addChild(shine, 0, KEY_SHINE_TAG);
-        
         this->runAnimationAction(CCRepeatForever::actionWithAction(CCAnimate::actionWithAnimation(CCAnimation::animationWithFrames(ANIMATION_KEY_STAY, 0.03), false)));
-        
     }
     
     void Key::runAnimationAction(CCAction* action) {
@@ -106,5 +99,5 @@ namespace aticboom {
         CCParticleSystemPoint* shine = (CCParticleSystemPoint*)this->getChildByTag(KEY_SHINE_TAG);
         shine->stopSystem();
     }
-
+    
 }

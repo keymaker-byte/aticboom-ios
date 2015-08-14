@@ -28,7 +28,6 @@
 
 #include <vector>
 #include <string>
-
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
 #include "CCTouchDispatcher.h"
@@ -39,43 +38,42 @@ using namespace cocos2d;
 using namespace CocosDenshion;
 using namespace std;
 
-class LoadingScene : public cocos2d::CCLayer
-{
+class LoadingScene : public cocos2d::CCLayer {
+    
 public:
     LoadingScene();
     ~LoadingScene();
-	virtual bool init();
+    virtual bool init();
     
-	static cocos2d::CCScene* scene(int worldId, int levelId);
-    
-    static LoadingScene* node(int worldId, int levelId) 
+    static cocos2d::CCScene* scene(int worldId, int levelId);
+    static LoadingScene* node(int worldId, int levelId)
     {
         LoadingScene *pRet = new LoadingScene();
         pRet->worldId = worldId;
         pRet->levelId = levelId;
-        if (pRet && pRet->init()) 
-        { 
-            pRet->autorelease(); 
-            return pRet; 
-        } 
-        else 
-        { 
-            delete pRet; 
-            pRet = NULL; 
-            return NULL; 
-        } 
+        if (pRet && pRet->init())
+        {
+            pRet->autorelease();
+            return pRet;
+        }
+        else
+        {
+            delete pRet;
+            pRet = NULL;
+            return NULL;
+        }
     };
     
-    void goToGame(CCNode* pSender); 
     int worldId;
     int levelId;
     
+    void goToGame(CCNode* pSender);
     void onEnter();
     void onExit();
-    
     void loadGameTextures(int worldId);
     void loadComicTextures();
     void loadMenuTextures();
+    
 };
 
 #endif

@@ -28,27 +28,28 @@
 
 #include <vector>
 #include <string>
-
 #include "Config.h"
-
 #include "json.h"
 #include "cocos2d.h"
-
 #include "Geometry.h"
 
 namespace aticboom {
+    
     class Text : public cocos2d::CCNode {
+        
     public:
         Text(Json::Value text);
         ~Text();
+        
         int image;
         int index;
         int tileHeight;
         int tileWidth;
         
         void initSimpleSprite();
+        
     };
+    
 }
-
 
 #endif

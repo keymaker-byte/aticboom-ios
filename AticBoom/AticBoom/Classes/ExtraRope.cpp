@@ -57,6 +57,5 @@ namespace aticboom {
     }
     
     void ExtraRope::makeDark(){
-        
     }
 }

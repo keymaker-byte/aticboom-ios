@@ -32,7 +32,7 @@ namespace aticboom {
     
     Bubble::Bubble(Json::Value bubble, int world) : Bubble::GameObject(bubble, world){
         this->tileWidth = BUBBLE_TILES_WIDTH;
-        this->tileHeight = BUBBLE_TILES_HEIGHT; 
+        this->tileHeight = BUBBLE_TILES_HEIGHT;
         this->state = BUBBLE_STATE_NORMAL;
         this->initAnimations();
         this->setTilePosition();
@@ -46,34 +46,29 @@ namespace aticboom {
     
     void Bubble::initAnimations() {
         char buffer [50];
-        
         sprintf (buffer, BUBLE_FRAME_A.c_str(), 1);
         CCSprite* pSprite = CCSprite::spriteWithSpriteFrameName(buffer);
         this->addChild(pSprite, 1, BUBBLE_SPRITE_TAG);
-        
         ANIMATION_BUBBLE_STAY = new CCMutableArray<CCSpriteFrame*>();
         for(int i = 5; i <= 5; i++) {
             sprintf (buffer, BUBLE_FRAME_A.c_str(), i);
             CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(buffer);
             ANIMATION_BUBBLE_STAY->addObject(frame);
         }
-        
         ANIMATION_BUBBLE_UP = new CCMutableArray<CCSpriteFrame*>();
         for(int i = 1; i <= 30; i++) {
             sprintf (buffer, BUBLE_FRAME_A.c_str(), i);
             CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(buffer);
             ANIMATION_BUBBLE_UP->addObject(frame);
         }
-        
         ANIMATION_BUBBLE_EXPLODE = new CCMutableArray<CCSpriteFrame*>();
         for(int i = 1; i <= 30; i++) {
             sprintf (buffer, BUBLE_FRAME_B.c_str(), i);
             CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(buffer);
             ANIMATION_BUBBLE_EXPLODE->addObject(frame);
         }
-        
         this->runAnimationAction(CCAnimate::actionWithAnimation(CCAnimation::animationWithFrames(ANIMATION_BUBBLE_STAY, 0.03), false));
-    } 
+    }
     
     void Bubble::runAnimationAction(CCAction* action) {
         CCSprite* pSprite = (CCSprite*)this->getChildByTag(BUBBLE_SPRITE_TAG);
@@ -82,7 +77,6 @@ namespace aticboom {
     
     void Bubble::runMovingAction(CCAction* action){
         this->runAction(action);
-        
     }
     
     void Bubble::changeSpriteSize(float newsize) {
@@ -98,7 +92,6 @@ namespace aticboom {
     }
     
     void Bubble::moveUp(double speed, int power) {
-        
         if(power > 1) {
             SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::fullPathFromRelativePath(SOUND_FAN.c_str()));
         }
@@ -112,7 +105,6 @@ namespace aticboom {
         CCFiniteTimeAction* actionMoveDone = CCCallFuncN::actionWithTarget(this, callfuncN_selector(Bubble::moveUpFinished));
         this->runAnimationAction(CCRepeatForever::actionWithAction(CCAnimate::actionWithAnimation(CCAnimation::animationWithFrames(ANIMATION_BUBBLE_UP, 0.02), false)));
         this->runMovingAction( CCSequence::actions(actionMove, actionMoveDone, NULL) );
-    
     }
     
     void Bubble::moveUpFinished(CCNode* bubble) {

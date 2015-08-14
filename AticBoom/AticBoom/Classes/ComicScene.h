@@ -28,7 +28,6 @@
 
 #include <vector>
 #include <string>
-
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
 #include "CCTouchDispatcher.h"
@@ -42,37 +41,37 @@ using namespace std;
 
 namespace aticboom {
     
-class ComicScene : public cocos2d::CCLayer
-{
+    class ComicScene : public cocos2d::CCLayer {
+        
     public:
         ComicScene();
         ~ComicScene();
         virtual bool init();
-    
+        
         static cocos2d::CCScene* scene(int sequence);
-
-        static ComicScene* node(int sequence) 
+        static ComicScene* node(int sequence)
         {
             ComicScene *pRet = new ComicScene();
             pRet->sequence = sequence;
-            if (pRet && pRet->init()) 
-            { 
-                pRet->autorelease(); 
-                return pRet; 
-            } 
-            else 
-            { 
-                delete pRet; 
-                pRet = NULL; 
-                return NULL; 
-            } 
+            if (pRet && pRet->init())
+            {
+                pRet->autorelease();
+                return pRet;
+            }
+            else
+            {
+                delete pRet;
+                pRet = NULL;
+                return NULL;
+            }
         };
-    
+        
         int sequence;
         int currentPage;
         int totalPages;
         bool touchEnabled;
         bool cleanAfterExit;
+        
         void onEnter();
         void onExit();
         void showCurrentPage();
@@ -81,7 +80,9 @@ class ComicScene : public cocos2d::CCLayer
         void actionStopper(CCObject* pSender);
         void setupPlay();
         bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
+        
     };
+    
 }
 
 #endif

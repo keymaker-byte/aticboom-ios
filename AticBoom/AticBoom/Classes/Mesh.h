@@ -28,20 +28,17 @@
 
 #include <vector>
 #include <string>
-
 #include "Config.h"
-
 #include "json.h"
 #include "cocos2d.h"
-
 #include "json.h"
 #include "cocos2d.h"
-
 #include "GameObject.h"
 
-
 namespace aticboom {
+    
     class Mesh  {
+        
     public:
         Mesh(int floorsNumber);
         ~Mesh();
@@ -49,7 +46,9 @@ namespace aticboom {
         vector<vector<vector<GameObject* > > > tiles;
         int tileRows;
         int tileColumns;
+        
     };
+    
 }
 
 #endif

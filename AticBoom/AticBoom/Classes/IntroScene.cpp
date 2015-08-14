@@ -26,98 +26,72 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-
 #include "IntroScene.h"
 
-IntroScene::IntroScene() : IntroScene::CCLayerColor()
-{
-	
+IntroScene::IntroScene() : IntroScene::CCLayerColor() {
 }
 
-IntroScene::~IntroScene()
-{
-	
+IntroScene::~IntroScene() {
 }
 
-void IntroScene::onEnter()
-{
+void IntroScene::onEnter() {
     CCLayer::onEnter();
 }
 
-void IntroScene::onExit()
-{
+void IntroScene::onExit() {
     CCLayer::onExit();
-    
     CCTouchDispatcher::sharedDispatcher()->removeDelegate(this);
 }
 
-CCScene* IntroScene::scene()
-{
+CCScene* IntroScene::scene() {
     CCScene *scene = CCScene::node();
-	IntroScene *layer = IntroScene::node();
-	scene->addChild(layer, 0, 1);
-	return scene;
+    IntroScene *layer = IntroScene::node();
+    scene->addChild(layer, 0, 1);
+    return scene;
 }
 
-bool IntroScene::init()
-{
-	if ( !CCLayerColor::initWithColor(ccc4f(255, 255, 255, 255)) )
-	{
-		return false;
-	}
-    
+bool IntroScene::init() {
+    if ( !CCLayerColor::initWithColor(ccc4f(255, 255, 255, 255)) ) {
+        return false;
+    }
     this->setIsKeypadEnabled(true);
-    
     CCDirector::sharedDirector()->resume();
-    
-	CCSprite* gfflogo = CCSprite::spriteWithFile(Config::sharedConfig()->INTRO_PNG.c_str());
+    CCSprite* gfflogo = CCSprite::spriteWithFile(Config::sharedConfig()->INTRO_PNG.c_str());
     gfflogo->setPosition(Geometry::getScreenCenter());
     gfflogo->setOpacity(0);
     this->addChild(gfflogo, 0);
-    
     CCParticleSystemPoint* shine = (CCParticleSystemPoint*)CCParticleSystemPoint::particleWithFile(Config::sharedConfig()->WORLD_BURNING_PARTICLE.c_str());
     shine->setPosition( Geometry::getScreenCenter() );
-	shine->setStartColor(ccc4FFromccc4B(ccc4f(255, 100, 100, 5)));
+    shine->setStartColor(ccc4FFromccc4B(ccc4f(255, 100, 100, 5)));
     this->addChild(shine, 1);
-    
     //ipad fix
     if(CCDirector::sharedDirector()->getWinSizeInPixels().width >= 768) {
         Border* border = new Border();
         this->addChild(border, 999);
     }
-    
     this->loadTextures();
-    
     this->readSoundSettings();
-    
     gfflogo->runAction(CCSequence::actions(CCMoveBy::actionWithDuration(0, CCPointZero),  CCFadeIn::actionWithDuration(1), CCMoveBy::actionWithDuration(3, CCPointZero), CCCallFuncN::actionWithTarget( gfflogo, callfuncN_selector(IntroScene::goToTitle)), NULL));
-    
     SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::fullPathFromRelativePath(SOUND_LOGO.c_str()));
-    
-	return true;
+    return true;
 }
 
-void IntroScene::goToTitle(CCObject* pSender)
-{
+void IntroScene::goToTitle(CCObject* pSender) {
     CCDirector::sharedDirector()->replaceScene(CCTransitionFade::transitionWithDuration(1, MenuScene::scene()));
 }
 
 void IntroScene::loadTextures() {
     CCTextureCache::sharedTextureCache()->addImage(Config::sharedConfig()->MENU_PNG.c_str());
     CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile(Config::sharedConfig()->MENU_PLIST.c_str());
-    
     CCTextureCache::sharedTextureCache()->addImage(Config::sharedConfig()->BLACK_PNG.c_str());
     CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile(Config::sharedConfig()->BLACK_PLIST.c_str());
-    
     CCTextureCache::sharedTextureCache()->addImage(Config::sharedConfig()->LOADING_PNG.c_str());
     CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile(Config::sharedConfig()->LOADING_PLIST.c_str());
 }
 
-void IntroScene::readSoundSettings()
-{
+void IntroScene::readSoundSettings() {
     char fileName [1024];
     sprintf (fileName, SETTINGS_JSON.c_str(), CCFileUtils::getWriteablePath().c_str());
-    
     Json::Value root;
     unsigned long bufferSize = 0;
     unsigned char * uc =  CCFileUtils::getFileData(fileName,"a+", &bufferSize);
@@ -129,34 +103,27 @@ void IntroScene::readSoundSettings()
     }
     else {
         string fullPath = CCFileUtils::fullPathFromRelativePath(INITSETTINGS_JSON.c_str());
-        
         unsigned long bufferSizeI = 0;
         unsigned char * dataI =  CCFileUtils::getFileData(fullPath.c_str(),"r", &bufferSizeI);
         char * ca = (char *) dataI;
         string buffer = string(ca);
         Json::Reader reader;
         reader.parse(buffer.c_str(), root);
-        
         delete dataI;
     }
-    
     delete uc;
-    
     if (root["settings"]["sound"] == 1) {
         SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(MUSIC_VOLUME);
     } else {
         SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0);
     }
-    
     if (root["settings"]["fx"] == 1) {
         SimpleAudioEngine::sharedEngine()->setEffectsVolume(100);
     } else {
         SimpleAudioEngine::sharedEngine()->setEffectsVolume(0);
     }
-    
     Json::StyledWriter writer;
     std::string outputString = writer.write(root);
-    
     ofstream file;
     file.open(fileName);
     file << outputString;

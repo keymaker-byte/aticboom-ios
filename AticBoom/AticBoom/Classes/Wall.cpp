@@ -37,14 +37,11 @@ namespace aticboom {
     };
     
     Wall::~Wall() {
-        
     };
     
     void Wall::initSimpleSprite() {
         char buffer [50];
-        
         bool night = Geometry::isNight(this->world);
-        
         sprintf (buffer, WALL_PNG.c_str(), this->world);
         CCSprite* pSprite = CCSprite::spriteWithSpriteFrameName(buffer);
         if(night) {
@@ -57,5 +54,5 @@ namespace aticboom {
         CCSprite* pSprite = (CCSprite*)this->getChildByTag(WALL_SPRITE_TAG);
         pSprite->setColor(ccc3(DARK_COLOR_CORRECTOR, DARK_COLOR_CORRECTOR, DARK_COLOR_CORRECTOR));
     }
-
+    
 }

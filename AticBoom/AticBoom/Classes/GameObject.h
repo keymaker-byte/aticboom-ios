@@ -28,31 +28,31 @@
 
 #include <vector>
 #include <string>
-
 #include "Config.h"
-
 #include "json.h"
 #include "cocos2d.h"
-
 #include "Geometry.h"
 
 namespace aticboom {
-    class GameObject : public cocos2d::CCNode
-    {
+    
+    class GameObject : public cocos2d::CCNode {
+        
     public:
         GameObject(Json::Value gameObject, int world);
         ~GameObject();
+        
         int position[2];
         int tileHeight;
         int tileWidth;
-
+        int world;
+        
         void setTilePosition();
         virtual void runAnimationAction(cocos2d::CCAction* action);
         virtual void runMovingAction(cocos2d::CCAction* action);
         virtual void hide();
         
-        int world;
     };
+    
 }
 
 #endif

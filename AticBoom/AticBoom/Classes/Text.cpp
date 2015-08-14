@@ -25,8 +25,8 @@
 
 #include "Text.h"
 
-//TODO THIS CLASS NEED REFACTORING
 namespace aticboom {
+    
     using namespace cocos2d;
     
     Text::Text(Json::Value txt) : cocos2d::CCNode() {
@@ -40,12 +40,9 @@ namespace aticboom {
     };
     
     Text::~Text() {
-        
     };
     
     void Text::initSimpleSprite() {
-
     }
-    
     
 }

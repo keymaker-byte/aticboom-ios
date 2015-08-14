@@ -44,34 +44,29 @@ namespace aticboom {
     
     void Exit::initAnimations() {
         char buffer [50];
-        
         sprintf (buffer, EXIT_FRAME_A.c_str(), 1);
         CCSprite* pSprite = CCSprite::spriteWithSpriteFrameName(buffer);
         this->addChild(pSprite, 0, EXIT_SPRITE_TAG);
-        
         ANIMATION_EXIT_NORMAL = new CCMutableArray<CCSpriteFrame*>();
         for(int i = 1; i <= 14; i++) {
             sprintf (buffer, EXIT_FRAME_A.c_str(), i);
             CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(buffer);
             ANIMATION_EXIT_NORMAL->addObject(frame);
         }
-        
         ANIMATION_EXIT_FINISH = new CCMutableArray<CCSpriteFrame*>();
         for(int i = 15; i <= 30; i++) {
             sprintf (buffer, EXIT_FRAME_A.c_str(), i);
             CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(buffer);
             ANIMATION_EXIT_FINISH->addObject(frame);
         }
-        
         ANIMATION_EXIT_END = new CCMutableArray<CCSpriteFrame*>();
         for(int i = 31; i <= 44; i++) {
             sprintf (buffer, EXIT_FRAME_A.c_str(), i);
             CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(buffer);
             ANIMATION_EXIT_END->addObject(frame);
         }
-        
         this->runAnimationAction(CCRepeatForever::actionWithAction(CCAnimate::actionWithAnimation(CCAnimation::animationWithFrames(ANIMATION_EXIT_NORMAL, 0.02), false)));
-    } 
+    }
     
     void Exit::runAnimationAction(CCAction* action) {
         CCSprite* pSprite = (CCSprite*)this->getChildByTag(EXIT_SPRITE_TAG);
@@ -93,7 +88,6 @@ namespace aticboom {
         CCSprite* pSprite = (CCSprite*)this->getChildByTag(EXIT_SPRITE_TAG);
         pSprite->stopAllActions();
         this->stopAllActions();
-        
         CCFiniteTimeAction* action = CCAnimate::actionWithAnimation(CCAnimation::animationWithFrames(ANIMATION_EXIT_FINISH, 0.03), false);
         CCFiniteTimeAction* actionB = (CCAnimate::actionWithAnimation(CCAnimation::animationWithFrames(ANIMATION_EXIT_END, 0.02), false));
         this->runAnimationAction( CCSequence::actions(action,actionB,  NULL) );

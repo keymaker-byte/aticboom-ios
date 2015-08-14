@@ -23,7 +23,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-
 #include "Star.h"
 
 namespace aticboom {
@@ -45,25 +44,21 @@ namespace aticboom {
     
     void Star::initAnimations() {
         char buffer [50];
-        
         sprintf (buffer, STAR_FRAME_A.c_str(), 1);
         CCSprite* pSprite = CCSprite::spriteWithSpriteFrameName(buffer);
         this->addChild(pSprite, 1, STAR_SPRITE_TAG);
-        
         ANIMATION_STAR_STAY = new CCMutableArray<CCSpriteFrame*>();
         for(int i = 1; i <= 30; i++) {
             sprintf (buffer, STAR_FRAME_A.c_str(), i);
             CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(buffer);
             ANIMATION_STAR_STAY->addObject(frame);
-        } 
-        
+        }
         ANIMATION_STAR_GRAB = new CCMutableArray<CCSpriteFrame*>();
         for(int i = 1; i <= 30; i++) {
             sprintf (buffer, STAR_FRAME_B.c_str(), i);
             CCSpriteFrame *frame = CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(buffer);
             ANIMATION_STAR_GRAB->addObject(frame);
         }
-        
         CCParticleSystemPoint* shine = (CCParticleSystemPoint*)CCParticleSystemPoint::particleWithFile(Config::sharedConfig()->PARTICLE_SHINE.c_str());
         shine->setPosition( CCPoint(0,0) );
         shine->setPositionType(kCCPositionTypeRelative);
@@ -77,7 +72,7 @@ namespace aticboom {
         pSprite->runAction(action);
     }
     
-    void Star::runMovingAction(CCAction* action){
+    void Star::runMovingAction(CCAction* action) {
         this->runAction(action);
     }
     
@@ -97,7 +92,7 @@ namespace aticboom {
         SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::fullPathFromRelativePath(SOUND_STAR.c_str()));
     }
     
-    void Star::makeDark(){
+    void Star::makeDark() {
         CCSprite* pSprite = (CCSprite*)this->getChildByTag(STAR_SPRITE_TAG);
         pSprite->setColor(ccc3(DARK_COLOR_CORRECTOR, DARK_COLOR_CORRECTOR, DARK_COLOR_CORRECTOR));
         CCParticleSystemPoint* shine = (CCParticleSystemPoint*)this->getChildByTag(STAR_SHINE_TAG);

@@ -27,32 +27,26 @@
 
 namespace aticboom {
     Level::Level(Json::Value level) : cocos2d::CCNode(){
-        
         this->name = level["name"].asString();
         this->world = level["world"].asInt();
         this->floorSize = level["floorSize"].asInt();
         this->levelHint = level["levelHint"].asInt();
         this->autorelease();
-        
         int darkfloors[FLOOR_DARK_LIMIT];
-        
         const Json::Value floors = level["floors"];
         for ( int index = 0; index < floors.size(); ++index ) {
             Floor* floor = new Floor(floors[index], this->world);
             if (floor->dark == 1)
                 darkfloors[index] = 1;
-            else 
+            else
                 darkfloors[index] = 0;
-
-            this->addChild(floor, floor->image < 5 ? 0 : -1, FLOOR_TAG + index+1);//ultimo piso mas atras por el efecto de viento
-            
+            this->addChild(floor, floor->image < 5 ? 0 : -1, FLOOR_TAG + index+1);
             if(index > 0 && (index + 1) % 4 == 0 && index < floors.size() - 1) {
                 CCSprite* arrow = CCSprite::spriteWithSpriteFrameName(ARROW_PNG.c_str());
                 arrow->setPosition(Geometry::getTilePosition(0, (index) * FLOORS_TILES_HEIGHT, ARROW_TILES_WIDTH, ARROW_TILES_HEIGHT));
                 arrow->runAction(CCRepeatForever::actionWithAction(CCBlink::actionWithDuration(1, 2)));
                 this->addChild(arrow, 4);
             }
-            
             if(floor->type == FLOOR_TYPE_CLOSE) {
                 CCParticleSystemPoint* fire = (CCParticleSystemPoint*)CCParticleSystemPoint::particleWithFile(Config::sharedConfig()->FLOOR_PARTICLE_FIRE.c_str());
                 fire->setPosition( CCPoint(floor->getPosition().x, floor->getPosition().y - Config::sharedConfig()->TILE_HEIGHT * FLOORS_TILES_HEIGHT / 2 + Config::sharedConfig()->FLOOR_HEIGHT_MARGEN) );
@@ -61,7 +55,6 @@ namespace aticboom {
             }
         }
         this->mesh = new Mesh(this->floorSize);
-        
         this->fancyCount = 0;
         const Json::Value fancies = level["fancies"];
         for ( int index = 0; index < fancies.size(); ++index ) {
@@ -74,7 +67,7 @@ namespace aticboom {
             Key* key = new Key(keys[index], this->world);
             int floorNumber = key->position[1] / FLOORS_TILES_HEIGHT;
             if ( darkfloors[floorNumber] == 1 )
-                key->makeDark(); 
+                key->makeDark();
             this->addChild(key, 2);
             this->mesh->tiles[key->position[0]][key->position[1]].push_back(key);
         }
@@ -92,7 +85,7 @@ namespace aticboom {
             Stair* stair = new Stair(stairs[index], this->world);
             int floorNumber = stair->position[1] / FLOORS_TILES_HEIGHT;
             if ( darkfloors[floorNumber] == 1 )
-                stair->makeDark(); 
+                stair->makeDark();
             this->addChild(stair, 1, STAIR_TAG + index);
             this->mesh->tiles[stair->position[0]][stair->position[1]].push_back(stair);
         }
@@ -102,7 +95,7 @@ namespace aticboom {
             Star* star = new Star(stars[index], this->world);
             int floorNumber = star->position[1] / FLOORS_TILES_HEIGHT;
             if ( darkfloors[floorNumber] == 1 )
-                star->makeDark();            
+                star->makeDark();
             this->addChild(star, 2);
             this->mesh->tiles[star->position[0]][star->position[1]].push_back(star);
             this->starSize++;
@@ -113,7 +106,7 @@ namespace aticboom {
             ExtraBubble* extraBubble = new ExtraBubble(extraBubbles[index], this->world);
             int floorNumber = extraBubble->position[1] / FLOORS_TILES_HEIGHT;
             if ( darkfloors[floorNumber] == 1 )
-                extraBubble->makeDark(); 
+                extraBubble->makeDark();
             this->addChild(extraBubble, 2);
             this->mesh->tiles[extraBubble->position[0]][extraBubble->position[1]].push_back(extraBubble);
             this->extraBubblesSize++;
@@ -123,7 +116,7 @@ namespace aticboom {
             ExtraRope* extraRope = new ExtraRope(extraRopes[index], this->world);
             int floorNumber = extraRope->position[1] / Config::sharedConfig()->FLOOR_HEIGHT_MARGEN;
             if ( darkfloors[floorNumber] == 1 )
-                extraRope->makeDark(); 
+                extraRope->makeDark();
             this->addChild(extraRope, 2);
             this->mesh->tiles[extraRope->position[0]][extraRope->position[1]].push_back(extraRope);
         }
@@ -133,14 +126,12 @@ namespace aticboom {
         this->mesh->tiles[exit->position[0]][exit->position[1]].push_back(exit);
         const Json::Value playerJson = level["player"];
         Player* player = new Player(playerJson, this->world);
-        this->addChild(player, 5, PLAYER_TAG);        
-        
+        this->addChild(player, 5, PLAYER_TAG);
         const Json::Value texts = level["texts"];
         for ( int index = 0; index < texts.size(); ++index ) {
             Text* text = new Text(texts[index]);
             this->addChild(text, 4);
         }
-        
         const Json::Value enemies = level["enemies"];
         for ( int index = 0; index < enemies.size(); ++index ) {
             Enemy* enemy = new Enemy(enemies[index], this->world);
@@ -158,7 +149,7 @@ namespace aticboom {
         for ( int index = 0; index < fans.size(); index++ ) {
             Fan* fan = new Fan(fans[index], this->world);
             this->addChild(fan, 2);
-            this->mesh->tiles[fan->position[0]][fan->position[1]].push_back(fan); 
+            this->mesh->tiles[fan->position[0]][fan->position[1]].push_back(fan);
             for ( int i = 1; i <= FAN_TILES_RANGE ; i++) {
                 if ( fan->position[0]+i < this->mesh->tileColumns )
                     this->mesh->tiles[fan->position[0]+i][fan->position[1]].push_back(fan);
@@ -171,7 +162,7 @@ namespace aticboom {
             Wall* wall = new Wall(walls[index], this->world);
             int floorNumber = wall->position[1] / FLOORS_TILES_HEIGHT;
             if ( darkfloors[floorNumber] == 1 )
-                wall->makeDark(); 
+                wall->makeDark();
             this->addChild(wall, 2);
             this->mesh->tiles[wall->position[0]][wall->position[1]].push_back(wall);
             for ( int i = 1; i <= WALL_TILES_RANGE ; i++) {
@@ -189,8 +180,7 @@ namespace aticboom {
             this->addChild(bubble,5,BUBBLE_TAG+i);
         }
         const Json::Value buttons = level["buttons"];
-        for (int index = 0; index < buttons.size(); ++index)
-        {
+        for (int index = 0; index < buttons.size(); ++index) {
             Button* button = new Button(buttons[index], this->world);
             int floorNumber = button->position[1] / Config::sharedConfig()->FLOOR_HEIGHT_MARGEN;
             if (darkfloors[floorNumber] == 1)
@@ -198,13 +188,10 @@ namespace aticboom {
             this->addChild(button, 2);
             this->mesh->tiles[button->position[0]][button->position[1]].push_back(button);
         }
-        
         this->time = level["time"].asInt();
         this->totalTime = this->time;
         this->state = LEVEL_STATE_START;
     };
-    
-    
     
     Level::~Level() {
         delete this->mesh;
@@ -221,4 +208,5 @@ namespace aticboom {
     void Level::addChild(CCNode *child) {
         CCNode::addChild(child);
     }
+    
 }

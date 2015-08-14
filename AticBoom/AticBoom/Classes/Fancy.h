@@ -28,31 +28,32 @@
 
 #include <vector>
 #include <string>
-
 #include "Config.h"
-
 #include "json.h"
 #include "cocos2d.h"
-
 #include "Geometry.h"
 #include "GameObject.h"
+
 namespace aticboom {
-    class Fancy: public GameObject
-    {
+    
+    class Fancy: public GameObject {
+        
     public:
         Fancy(Json::Value fancies, int world);
         ~Fancy();
         
-        void appear();
-        void dissapear();
-        
         int image;
         bool shown;
         int floor;
+        
+        void appear();
+        void dissapear();
+        
     private:
         void initSimpleSprite();
+        
     };
+    
 }
-
 
 #endif
