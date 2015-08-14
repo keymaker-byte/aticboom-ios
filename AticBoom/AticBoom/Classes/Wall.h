@@ -26,31 +26,30 @@
 #ifndef AticBoom_Wall_h
 #define AticBoom_Wall_h
 
-
 #include <vector>
 #include <string>
-
 #include "Config.h"
-
 #include "json.h"
 #include "cocos2d.h"
-
 #include "GameObject.h"
 #include "GameScene.h"
 #include "Geometry.h"
 
 namespace aticboom {
-    class Wall : public GameObject
-    {
+    
+    class Wall : public GameObject {
+        
     public:
         Wall(Json::Value wall, int world);
         ~Wall();
         
         int image;
         
-        void initSimpleSprite(); 
+        void initSimpleSprite();
         void makeDark();
+        
     };
+    
 }
 
 #endif

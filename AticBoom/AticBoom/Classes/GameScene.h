@@ -29,12 +29,9 @@
 #include <vector>
 #include <string>
 #include <fstream>
-
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
-
 #include "json.h"
-
 #include "Level.h"
 #include "GameObject.h"
 #include "Mesh.h"
@@ -48,41 +45,37 @@
 #include "Border.h"
 #include "CCTouchDispatcher.h"
 
-
 using namespace cocos2d;
 using namespace CocosDenshion;
 using namespace std;
 using namespace aticboom;
 
-//Escena del juego
-class GameScene : public cocos2d::CCLayer
-{
+class GameScene : public cocos2d::CCLayer {
+    
 public:
     GameScene();
     ~GameScene();
-	virtual bool init();
+    virtual bool init();
     
-	static cocos2d::CCScene* scene(int worldId, int levelId);
-    
+    static cocos2d::CCScene* scene(int worldId, int levelId);
     static GameScene* node(int worldId, int levelId)
-    { 
+    {
         GameScene *pRet = new GameScene();
         pRet->worldId = worldId;
         pRet->levelId = levelId;
-        if (pRet && pRet->init()) 
-        { 
-            pRet->autorelease(); 
-            return pRet; 
-        } 
-        else 
-        { 
-            delete pRet; 
-            pRet = NULL; 
-            return NULL; 
-        } 
-    }; 
+        if (pRet && pRet->init())
+        {
+            pRet->autorelease();
+            return pRet;
+        }
+        else
+        {
+            delete pRet;
+            pRet = NULL;
+            return NULL;
+        }
+    };
     
-
     int worldId;
     int levelId;
     int scroll;
@@ -93,6 +86,10 @@ public:
     bool musicLoaded;
     bool isBestScore;
     bool cleanAfterExit;
+    bool paused;
+    bool isNewGolden;
+    bool isGoldenWorld;
+    bool isCompletedWorld;
     
     bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
     void scrollUp();
@@ -114,16 +111,12 @@ public:
     void playAgain();
     void mainMenu();
     static void worldSelectScreen();
-    bool paused;
     void onEnter();
     void onExit();
     void destroyLevel();
     void makeLevel();
-    bool isNewGolden;
-    bool isGoldenWorld;
-    bool isCompletedWorld;
     void keyBackClicked();
-
+    
 };
 
 #endif

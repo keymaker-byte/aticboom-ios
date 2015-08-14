@@ -29,8 +29,7 @@ namespace aticboom
 {
     using namespace cocos2d;
     
-    Button::Button(Json::Value button, int world) : Button::GameObject(button, world)
-    {
+    Button::Button(Json::Value button, int world) : Button::GameObject(button, world) {
         this->tileWidth = BUTTON_TILES_WIDTH;
         this->tileHeight = BUTTON_TILES_HEIGHT;
         this->stairIndex = button["stairIndex"].asInt();
@@ -39,12 +38,10 @@ namespace aticboom
         this->setTilePosition();
     }
     
-    Button::~Button()
-    {
+    Button::~Button() {
     }
     
-    void Button::press()
-    {
+    void Button::press() {
         if(this->state == 0) {
             this->state = 1;
             this->removeChildByTag(KEY_SPRITE_TAG, true);
@@ -55,20 +52,18 @@ namespace aticboom
             this->state = 0;
             this->removeChildByTag(KEY_SPRITE_TAG, true);
             CCSprite* pSprite = CCSprite::spriteWithSpriteFrameName("pw-btnon.png");
-            this->addChild(pSprite, 0, KEY_SPRITE_TAG);    
+            this->addChild(pSprite, 0, KEY_SPRITE_TAG);
         }
     }
     
-    void Button::makeDark()
-    {
+    void Button::makeDark() {
         CCSprite* pSprite = (CCSprite*)this->getChildByTag(KEY_SPRITE_TAG);
         pSprite->setColor(ccc3(DARK_COLOR_CORRECTOR, DARK_COLOR_CORRECTOR, DARK_COLOR_CORRECTOR));
     }
     
-    void Button::initAnimations()
-    {
-        
+    void Button::initAnimations() {
         CCSprite* pSprite = CCSprite::spriteWithSpriteFrameName("pw-btnon.png");
         this->addChild(pSprite, 0, KEY_SPRITE_TAG);
     }
+    
 }

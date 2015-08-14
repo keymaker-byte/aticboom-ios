@@ -25,18 +25,14 @@
 namespace aticboom {
     
     Config::Config() {
-        
         setLanguage();
         readFullGame();
-        
-        
         SCREEN_WIDTH = 320;
         SCREEN_HEIGHT = 480;
         SCREEN_WIDTH_MARGEN = 0;
         SCREEN_HEIGHT_MARGEN = 0;
         TILE_HEIGHT = 16;
         TILE_WIDTH = 16;
-        
         PLAYER_SMOKE_HEIGHT_MARGEN = 15;
         FLOOR_HEIGHT_MARGEN = 7;
         ROPE_WIDTH_MARGEN = 12;
@@ -76,7 +72,6 @@ namespace aticboom {
         COMIC_MARGIN_TXT_C = 85;
         COMIC_MARGIN_TXT_D = 65;
         COMIC_MARGIN_TXT_E = 30;
-        
         MENU_HELP_BUTTON_MARGEN = 140;
         MENU_ABOUT_BUTTON_MARGEN = 100;
         MENU_OF_BUTTON_MARGEN_A = 25;
@@ -127,7 +122,6 @@ namespace aticboom {
         KNIFE_MARGINY = 85;
         FONT_SCALE = 1;
         SHADOW_TEXT = 2;
-        
         BUBLE_PARTICLE_EXPLODE = "pop.plist";
         FLOOR_PARTICLE_FIRE = "floorfire.plist";
         FLOOR_PARTICLE_WIND = "wind.plist";
@@ -139,7 +133,7 @@ namespace aticboom {
         SHIP_PARTICLE_EXPLODE = "shipexplode.plist";
         ROPE_PARTICLE_FIRE = "fire.plist";
         PARTICLE_SHINE = "shine.plist";
-        WORLD_BURNING_PARTICLE = "burning.plist"; 
+        WORLD_BURNING_PARTICLE = "burning.plist";
         FAN_PARTICLE_PLIST = "fan.plist";
         WATER_PARTICLE = "waterpart.plist";
         MENU_PNG = "mainmenu.png";
@@ -166,29 +160,25 @@ namespace aticboom {
         INTRO_PNG2 = "gff2.png";
         POWERUPS_PNG = "powerups.png";
         POWERUPS_PLIST = "powerups.plist";
-        
     }
-    
     
     static Config *s_config;
     
     Config* Config::sharedConfig() {
         if (! s_config)
-		{
-			s_config = new Config();
-		}
-		return s_config;
+        {
+            s_config = new Config();
+        }
+        return s_config;
     }
     
     void Config::iPadFix() {
-        
         SCREEN_WIDTH = 640;
         SCREEN_HEIGHT = 960;
         SCREEN_WIDTH_MARGEN = 64;
         SCREEN_HEIGHT_MARGEN = 64;
         TILE_HEIGHT = 32;
         TILE_WIDTH = 32;
-        
         PLAYER_SMOKE_HEIGHT_MARGEN = 15  * 2;
         FLOOR_HEIGHT_MARGEN = 7 * 2;
         ROPE_WIDTH_MARGEN = 12 * 2;
@@ -228,7 +218,6 @@ namespace aticboom {
         COMIC_MARGIN_TXT_C = 85 * 2;
         COMIC_MARGIN_TXT_D = 65 * 2;
         COMIC_MARGIN_TXT_E = 30 * 2;
-        
         MENU_HELP_BUTTON_MARGEN = 140 * 2;
         MENU_ABOUT_BUTTON_MARGEN = 100 * 2;
         MENU_OF_BUTTON_MARGEN_A = 25 * 2;
@@ -279,7 +268,6 @@ namespace aticboom {
         KNIFE_MARGINY = 85 * 2;
         FONT_SCALE = 1;
         SHADOW_TEXT = 2;
-        
         BUBLE_PARTICLE_EXPLODE = "pop-ipad.plist";
         FLOOR_PARTICLE_FIRE = "floorfire-ipad.plist";
         FLOOR_PARTICLE_WIND = "wind-ipad.plist";
@@ -290,7 +278,7 @@ namespace aticboom {
         PLAYER_PARTICLE_FIREWORKS = "fireworks-ipad.plist";
         ROPE_PARTICLE_FIRE = "fire-ipad.plist";
         PARTICLE_SHINE = "shine-ipad.plist";
-        WORLD_BURNING_PARTICLE = "burning-ipad.plist"; 
+        WORLD_BURNING_PARTICLE = "burning-ipad.plist";
         FAN_PARTICLE_PLIST = "fan-ipad.plist";
         WATER_PARTICLE = "waterpart-ipad.plist";
         MENU_PNG = "mainmenu-hd.png";
@@ -319,11 +307,9 @@ namespace aticboom {
         POWERUPS_PLIST = "powerups-hd.plist";
     }
     
-    void Config::readFullGame()
-    {
+    void Config::readFullGame() {
         char fileName [1024];
         sprintf (fileName, SETTINGS_JSON.c_str(), cocos2d::CCFileUtils::getWriteablePath().c_str());
-        
         Json::Value root;
         unsigned long bufferSize = 0;
         unsigned char * uc =  cocos2d::CCFileUtils::getFileData(fileName,"a+", &bufferSize);
@@ -345,17 +331,13 @@ namespace aticboom {
             
             delete dataI;
         }
-        
         delete uc;
-
         TOTAL_WORLDS = 6;
     }
     
-    void Config::writeFullGame()
-    {
+    void Config::writeFullGame() {
         char fileName [1024];
         sprintf (fileName, SETTINGS_JSON.c_str(), cocos2d::CCFileUtils::getWriteablePath().c_str());
-        
         Json::Value root;
         unsigned long bufferSize = 0;
         unsigned char * uc =  cocos2d::CCFileUtils::getFileData(fileName,"a+", &bufferSize);
@@ -377,25 +359,19 @@ namespace aticboom {
             
             delete dataI;
         }
-        
         delete uc;
-        
         Json::StyledWriter writer;
         std::string outputString = writer.write(root);
-        
         TOTAL_WORLDS = 6;
-        
         ofstream file;
         file.open(fileName);
         file << outputString;
         file.close();
     }
     
-    void Config::writeLevelsGame()
-    {
+    void Config::writeLevelsGame() {
         char fileName [1024];
         sprintf (fileName, SETTINGS_JSON.c_str(), cocos2d::CCFileUtils::getWriteablePath().c_str());
-        
         Json::Value root;
         unsigned long bufferSize = 0;
         unsigned char * uc =  cocos2d::CCFileUtils::getFileData(fileName,"a+", &bufferSize);
@@ -417,78 +393,59 @@ namespace aticboom {
             
             delete dataI;
         }
-        
         delete uc;
-        
         Json::StyledWriter writer;
         std::string outputString = writer.write(root);
-                
         ofstream file;
         file.open(fileName);
         file << outputString;
         file.close();
     }
     
-    
-    void Config::setLanguage()
-    {
+    void Config::setLanguage() {
         cocos2d::ccLanguageType lang = cocos2d::CCApplication::getCurrentLanguage();
-        
         string fullPath;
-        if (lang == cocos2d::kLanguageSpanish)
-        {
+        if (lang == cocos2d::kLanguageSpanish) {
             LANG = "es";
             fullPath = cocos2d::CCFileUtils::fullPathFromRelativePath(LANG_ES.c_str());
         }
-        else if (lang == cocos2d::kLanguagePortugues)
-        {
+        else if (lang == cocos2d::kLanguagePortugues) {
             LANG = "pt";
             fullPath = cocos2d::CCFileUtils::fullPathFromRelativePath(LANG_PT.c_str());
         }
-        else if (lang == cocos2d::kLanguageGerman)
-        {
+        else if (lang == cocos2d::kLanguageGerman) {
             LANG = "de";
             fullPath = cocos2d::CCFileUtils::fullPathFromRelativePath(LANG_DE.c_str());
         }
-        else if (lang == cocos2d::kLanguageFrench)
-        {
+        else if (lang == cocos2d::kLanguageFrench) {
             LANG = "fr";
             fullPath = cocos2d::CCFileUtils::fullPathFromRelativePath(LANG_FR.c_str());
         }
-        else if (lang == cocos2d::kLanguageItalian)
-        {
+        else if (lang == cocos2d::kLanguageItalian) {
             LANG = "it";
             fullPath = cocos2d::CCFileUtils::fullPathFromRelativePath(LANG_IT.c_str());
         }
-        else if (lang == cocos2d::kLanguageKorean)
-        {
+        else if (lang == cocos2d::kLanguageKorean) {
             LANG = "ko";
             fullPath = cocos2d::CCFileUtils::fullPathFromRelativePath(LANG_KO.c_str());
         }
-        else if (lang == cocos2d::kLanguageChinese)
-        {
+        else if (lang == cocos2d::kLanguageChinese) {
             LANG = "zh";
             fullPath = cocos2d::CCFileUtils::fullPathFromRelativePath(LANG_ZH.c_str());
         }
-        else
-        {
+        else {
             LANG = "en";
             fullPath = cocos2d::CCFileUtils::fullPathFromRelativePath(LANG_EN.c_str());
         }
-        
         CCLOG(fullPath.c_str());
-        
         Json::Value root;
-        
         unsigned long bufferSizeI = 0;
         unsigned char * dataI =  cocos2d::CCFileUtils::getFileData(fullPath.c_str(),"r", &bufferSizeI);
         char * ca = (char *) dataI;
         string buffer = string(ca);
         Json::Reader reader;
         reader.parse(buffer.c_str(), root);
-        
         delete dataI;
-        
         LANG_SOON = root["soon"].asString();
         LANG_AGAIN = root["again"].asString();
         LANG_BESTSCORE = root["bestScore"].asString();
@@ -523,7 +480,6 @@ namespace aticboom {
         LANG_COMIC_TEXT_5 = root["comictxt5"].asString();
         LANG_UNLOCK = root["unlock"].asString();
         LANG_STORE = root["store"].asString();
-        
         LANG_HINT_1 = root["hint-1"].asString();
         LANG_HINT_2 = root["hint-2"].asString();
         LANG_HINT_3 = root["hint-3"].asString();
@@ -541,7 +497,6 @@ namespace aticboom {
         LANG_HINT_15 = root["hint-15"].asString();
         LANG_HINT_16 = root["hint-16"].asString();
         LANG_HINT_17 = root["hint-17"].asString();
-        
         LANG_RESTORE = root["restore"].asString();
     }
     

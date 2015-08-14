@@ -37,7 +37,6 @@ namespace aticboom {
     };
     
     GameObject::~GameObject() {
-        
     };
     
     void GameObject::setTilePosition() {
@@ -45,15 +44,12 @@ namespace aticboom {
     }
     
     void GameObject::runAnimationAction(CCAction *action) {
-        
     }
     
     void GameObject::runMovingAction(CCAction *action) {
-        
     }
     
     void GameObject::hide() {
-        
     }
-
+    
 }

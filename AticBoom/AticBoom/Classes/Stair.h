@@ -26,25 +26,23 @@
 #ifndef AticBoom_Stair_h
 #define AticBoom_Stair_h
 
-
 #include <vector>
 #include <string>
-
 #include "Config.h"
 #include "Music.h"
-
 #include "json.h"
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
-
 #include "GameObject.h"
 
 namespace aticboom {
-    class Stair : public GameObject
-    {
+    
+    class Stair : public GameObject {
+        
     public:
         Stair(Json::Value stair, int world);
         ~Stair();
+        
         int type;
         
         void runAnimationAction(cocos2d::CCAction* action);
@@ -52,18 +50,16 @@ namespace aticboom {
         void hide();
         void makeDark();
         void switchPosition();
-        
         void doorOpenLeft();
         void doorCloseLeft(CCNode* sender);
         void doorOpenRight();
         void doorCloseRight(CCNode* sender);
         
-        
     private:
         void initAnimations();
+        
     };
+    
 }
-
-
 
 #endif

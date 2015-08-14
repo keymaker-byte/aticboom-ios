@@ -33,14 +33,13 @@
 using namespace std;
 
 namespace aticboom {
-
+    
     class Config {
-    public:
         
+    public:
         static Config* sharedConfig();
         
         void iPadFix();
-
         void writeFullGame();
         void writeLevelsGame();
         
@@ -50,7 +49,6 @@ namespace aticboom {
         int SCREEN_HEIGHT_MARGEN;
         int TILE_HEIGHT;
         int TILE_WIDTH;
-        
         int PLAYER_SMOKE_HEIGHT_MARGEN;
         int FLOOR_HEIGHT_MARGEN;
         int ROPE_WIDTH_MARGEN;
@@ -90,7 +88,6 @@ namespace aticboom {
         int COMIC_MARGIN_TXT_C;
         int COMIC_MARGIN_TXT_D;
         int COMIC_MARGIN_TXT_E;
-        
         int MENU_HELP_BUTTON_MARGEN;
         int MENU_ABOUT_BUTTON_MARGEN;
         int MENU_OF_BUTTON_MARGEN_A;
@@ -141,7 +138,6 @@ namespace aticboom {
         int KNIFE_MARGINY;
         float FONT_SCALE;
         int SHADOW_TEXT;
-        
         string BUBLE_PARTICLE_EXPLODE;
         string FLOOR_PARTICLE_FIRE;
         string FLOOR_PARTICLE_WIND;
@@ -153,7 +149,7 @@ namespace aticboom {
         string SHIP_PARTICLE_EXPLODE;
         string ROPE_PARTICLE_FIRE;
         string PARTICLE_SHINE;
-        string WORLD_BURNING_PARTICLE; 
+        string WORLD_BURNING_PARTICLE;
         string FAN_PARTICLE_PLIST;
         string WATER_PARTICLE;
         string MENU_PNG;
@@ -176,7 +172,6 @@ namespace aticboom {
         string HUD_PLIST;
         string BMFONT_NAME;
         string CONFETI_PARTICLE;
-        
         string LANG;
         string LANG_AGAIN;
         string LANG_BESTSCORE;
@@ -230,13 +225,10 @@ namespace aticboom {
         string LANG_HINT_16;
         string LANG_HINT_17;
         string LANG_RESTORE;
-        
         string INTRO_PNG;
         string INTRO_PNG2;
-        
         string POWERUPS_PNG;
         string POWERUPS_PLIST;
-        
         int TOTAL_WORLDS;
         
     private:
@@ -245,7 +237,6 @@ namespace aticboom {
         void readFullGame();
         
     };
-    
     
     static const int FLOORS_TILES_HEIGHT = 7;
     static const int FLOORS_TILES_WIDTH = 20;
@@ -314,10 +305,10 @@ namespace aticboom {
     static const int FANCY_TILES_HEIGHT = 8;
     static const int FANCY_TILES_WIDTH = 20;
     static const int ENEMY_TILES_HEIGHT = 4;
-    static const int ENEMY_TILES_WIDTH = 4; 
+    static const int ENEMY_TILES_WIDTH = 4;
     static const int ENEMY_TILES_RANGE = 2;
-    static const int ENEMY_STATE_RIGHT = 1; 
-    static const int ENEMY_STATE_LEFT = 2; 
+    static const int ENEMY_STATE_RIGHT = 1;
+    static const int ENEMY_STATE_LEFT = 2;
     static const int FAN_TILES_WIDTH = 4;
     static const int FAN_TILES_HEIGHT = 2;
     static const int FAN_TILES_RANGE = 1;
@@ -421,7 +412,6 @@ namespace aticboom {
     static const int RESTORE_TAG = 87;
     static const int STAIRDOOR_TAG = 88;
     static const int STAIRDOORPARENT_TAG = 89;
-    
     static const int BUBBLE_TAG = 500;
     static const int FLOOR_TAG = 600;
     static const int COIN_TAG = 700;
@@ -431,9 +421,7 @@ namespace aticboom {
     static const int STAIR_TAG = 1100;
     static const int FIRE_TAG = 1200;
     static const int FANCY_TAG = 1300;
-    
     static const int LEVELS_PER_WORLD = 16;
-    
     static const string BUBLE_FRAME_A = "Burbuja000%02d.png";
     static const string BUBLE_FRAME_B = "Burbujaexplode000%02d.png";
     static const string EXIT_FRAME_A = "door000%02d.png";
@@ -455,7 +443,7 @@ namespace aticboom {
     static const string SETTINGS_JSON = "%ssettings.json";
     static const string INITLEVELS_JSON = "initlevels.json";
     static const string INITSETTINGS_JSON = "initsettings.json";
-    static const string WORLDS_JSON = "worlds.json"; 
+    static const string WORLDS_JSON = "worlds.json";
     static const string LEVEL_JSON = "w%d-level%02d.json";
     static const string FLOOR_PNG = "floor%d.png";
     static const string TITLE_PNG = "title.png";
@@ -464,16 +452,16 @@ namespace aticboom {
     static const string MAP_PNG = "maptable.png";
     static const string HUD_STAR_PNG = "starhud.png";
     static const string HUD_PAUSE_PNG = "buttonpause.png";
-    static const string HUD_RELOAD_PNG = "buttonreload.png"; 
+    static const string HUD_RELOAD_PNG = "buttonreload.png";
     static const string FAN_FRAME_A = "key000%02d.png";
     static const string FAN_PNG = "key.png";
     static const string ENEMY_PNG = "character.png";
     static const string ENEMY_PLIST = "character.plist";
-    static const string WORLD_BUTTON1 = "button1.png"; 
-    static const string WORLD_BUTTON2 = "button2.png"; 
-    static const string WORLD_WATER = "water.png"; 
+    static const string WORLD_BUTTON1 = "button1.png";
+    static const string WORLD_BUTTON2 = "button2.png";
+    static const string WORLD_WATER = "water.png";
     static const string WORLD_BOARD = "worldboard.png";
-    static const string WORLD_ANCHOR = "anchor.png"; 
+    static const string WORLD_ANCHOR = "anchor.png";
     static const string LEVEL_BUTTON_A = "level-white.png";
     static const string LEVEL_BUTTON_B = "level-open.png";
     static const string LEVEL_BUTTON_C = "level-gold.png";
@@ -487,22 +475,22 @@ namespace aticboom {
     static const string CLOUD_A = "cloud1.png";
     static const string CLOUD_B = "cloud2.png";
     static const string CLOUD_C = "cloud3.png";
-    static const string WOOD_PNG = "wood.png"; 
+    static const string WOOD_PNG = "wood.png";
     static const string SCROLL_PNG = "scroll.png";
     static const string SCROLL2_PNG = "scroll2.png";
     static const string ICON_WORLD = "world%d.png";
-    static const string LOADING_SCREEN = "loading.png"; 
-    static const string WORLD_SELECT_BG = "mainback.png";  
+    static const string LOADING_SCREEN = "loading.png";
+    static const string WORLD_SELECT_BG = "mainback.png";
     static const string WORLD_SELECT_BACK = "buttonback.png";
     static const string WORLD_SELECT_AD_1 = "moregames.png";
     static const string WORLD_SELECT_AD_2 = "morelevels.png";
-    static const string STAIR_PNG = "stair.png";  
+    static const string STAIR_PNG = "stair.png";
     static const string FLOOR_BACK_PNG = "floor5back.png";
     static const string FLOOR_SUPER_PNG = "mast.png";
     static const string FLOOR_SUPER_BACK_PNG = "mastback.png";
-    static const string HOLE_PNG = "hole.png"; 
-    static const string WALL_PNG = "wall.png"; 
-    static const string CHAINS_PNG = "chains.png"; 
+    static const string HOLE_PNG = "hole.png";
+    static const string WALL_PNG = "wall.png";
+    static const string CHAINS_PNG = "chains.png";
     static const string TABLE_PNG = "table.png";
     static const string ARROW_PNG = "arrow.png";
     static const string MINISCROLL_PNG = "miniscroll.png";
@@ -536,8 +524,7 @@ namespace aticboom {
     static const string SCROLLTABLE_PNG = "scrolltable2.png";
     static const string SCROLLTABLEBIG_PNG = "scrolltable.png";
     static const string MAPTABLE_PNG = "maptable.png";
-
-    static const string LANG_EN = "lang-en.json";    
+    static const string LANG_EN = "lang-en.json";
     static const string LANG_ES = "lang-es.json";
     static const string LANG_PT = "lang-pt.json";
     static const string LANG_DE = "lang-de.json";
@@ -545,7 +532,7 @@ namespace aticboom {
     static const string LANG_IT = "lang-it.json";
     static const string LANG_KO = "lang-ko.json";
     static const string LANG_ZH = "lang-zh.json";
+    
 }
-    
-    
+
 #endif

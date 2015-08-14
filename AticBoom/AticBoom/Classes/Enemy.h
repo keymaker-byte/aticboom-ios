@@ -26,24 +26,22 @@
 #ifndef AticBoom_Enemy_h
 #define AticBoom_Enemy_h
 
-
 #include <vector>
 #include <string>
-
 #include "Config.h"
-
 #include "json.h"
 #include "cocos2d.h"
-
 #include "GameObject.h"
 #include "GameScene.h"
 
 namespace aticboom {
-    class Enemy : public GameObject
-    {
+    
+    class Enemy : public GameObject {
+        
     public:
         Enemy(Json::Value enemy, int world);
         ~Enemy();
+        
         int state;
         double speed;
         
@@ -61,7 +59,9 @@ namespace aticboom {
         
     private:
         void initAnimations();
+        
     };
+    
 }
 
 #endif

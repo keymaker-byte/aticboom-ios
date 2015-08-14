@@ -26,30 +26,27 @@
 #ifndef AticBoom_ExtraRope_h
 #define AticBoom_ExtraRope_h
 
-
 #include <vector>
 #include <string>
-
 #include "Config.h"
 #include "Music.h"
-
 #include "json.h"
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
-
 #include "json.h"
-
 #include "GameObject.h"
-
 #include "Hud.h"
 
 namespace aticboom {
+    
     class ExtraRope : public GameObject {
+        
     public:
         ExtraRope(Json::Value floor, int world);
         ~ExtraRope();
         
         int extraTime;
+        
         void hide();
         void grab();
         void makeDark();
@@ -60,6 +57,7 @@ namespace aticboom {
         void initAnimations();
         
     };
+    
 }
 
 

@@ -28,40 +28,39 @@
 
 #include <vector>
 #include <string>
-
 #include "Config.h"
-
 #include "json.h"
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
-
 #include "Geometry.h"
 #include "Music.h"
 #include "GameScene.h"
 #include "Bubble.h"
 
 namespace aticboom {
+    
     class Hud : public cocos2d::CCNode {
+    
     public:
         Hud(Json::Value level);
         ~Hud();
         
         int burningTime;
-        
-        void setStarNumber(int number);        
-        void buildBubbles(Json::Value level);
-        void addBubble();
-        void killBubble();
         int bubbleSize;
         int totalBubble;
         
+        void setStarNumber(int number);
+        void buildBubbles(Json::Value level);
+        void addBubble();
+        void killBubble();
+        
         cocos2d::CCMutableArray<cocos2d::CCSpriteFrame* >** ANIMATION_BUBBLELIQUID;
-
-    
+        
     private:
         void initAnimations();
+        
     };
+    
 }
-
 
 #endif

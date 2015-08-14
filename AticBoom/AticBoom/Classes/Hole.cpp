@@ -32,19 +32,16 @@ namespace aticboom {
     Hole::Hole(Json::Value hole, int world) : Hole::GameObject(hole, world) {
         this->tileWidth = HOLE_TILES_WIDTH;
         this->tileHeight = HOLE_TILES_HEIGHT;
-        this->initAnimations(); 
+        this->initAnimations();
         this->setTilePosition();
     };
     
     Hole::~Hole() {
-        
     };
     
     void Hole::initAnimations() {
         char buffer [50];
-        
         bool night = Geometry::isNight(this->world);
-        
         sprintf (buffer, HOLE_PNG.c_str(), this->world);
         CCSprite* pSprite = CCSprite::spriteWithSpriteFrameName(buffer);
         if(night) {
@@ -73,5 +70,5 @@ namespace aticboom {
         CCSprite* pSprite = (CCSprite*)this->getChildByTag(HOLE_SPRITE_TAG);
         pSprite->setColor(ccc3(DARK_COLOR_CORRECTOR, DARK_COLOR_CORRECTOR, DARK_COLOR_CORRECTOR));
     }
-
+    
 }

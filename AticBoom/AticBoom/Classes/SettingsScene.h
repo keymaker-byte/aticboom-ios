@@ -28,7 +28,6 @@
 
 #include <vector>
 #include <string>
-
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
 #include "CCTouchDispatcher.h"
@@ -40,40 +39,37 @@ using namespace cocos2d;
 using namespace CocosDenshion;
 using namespace std;
 
-//Escena de Settings
-class SettingsScene : public cocos2d::CCLayer
-{
+class SettingsScene : public cocos2d::CCLayer {
+    
 public:
     SettingsScene();
     ~SettingsScene();
-	virtual bool init();
+    virtual bool init();
     
-	static cocos2d::CCScene* scene();
-    
-    static SettingsScene* node() 
+    static cocos2d::CCScene* scene();
+    static SettingsScene* node()
     {
         SettingsScene *pRet = new SettingsScene();
-        if (pRet && pRet->init()) 
-        { 
-            pRet->autorelease(); 
-            return pRet; 
-        } 
-        else 
-        { 
-            delete pRet; 
-            pRet = NULL; 
-            return NULL; 
-        } 
+        if (pRet && pRet->init())
+        {
+            pRet->autorelease();
+            return pRet;
+        }
+        else
+        {
+            delete pRet;
+            pRet = NULL;
+            return NULL;
+        }
     };
     
-    bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
-    
-    void onEnter();
-    void onExit();
     int soundstate;
     int fxstate;
     bool confirmationMode;
     
+    bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
+    void onEnter();
+    void onExit();
     void backToTitle(CCObject* pSender);
     void toggleMusic(CCObject* pSender);
     void toggleFx(CCObject* pSender);
@@ -83,7 +79,7 @@ public:
     void hideConfirmation();
     void keyBackClicked();
     void reloopCloud(CCNode* cloud);
-
+    
 };
 
 #endif

@@ -28,13 +28,10 @@
 
 #include <vector>
 #include <string>
-
 #include "Config.h"
-
 #include "json.h"
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
-
 #include "Bubble.h"
 #include "Floor.h"
 #include "Stair.h"
@@ -57,15 +54,12 @@ using namespace CocosDenshion;
 using namespace std;
 
 namespace aticboom {
-    class Level : public cocos2d::CCNode
-    {
+    
+    class Level : public cocos2d::CCNode {
+        
     public:
         Level(Json::Value level);
         ~Level();
-        
-        void addChild(CCNode *child, int zOrder, int tag);
-        void addChild(CCNode *child, int zOrder);
-        void addChild(CCNode *child);
         
         string name;
         int time;
@@ -79,9 +73,13 @@ namespace aticboom {
         int bubbleNumber;
         Mesh* mesh;
         int fancyCount;
+        
+        void addChild(CCNode *child, int zOrder, int tag);
+        void addChild(CCNode *child, int zOrder);
+        void addChild(CCNode *child);
+        
     };
+    
 }
-
-
 
 #endif

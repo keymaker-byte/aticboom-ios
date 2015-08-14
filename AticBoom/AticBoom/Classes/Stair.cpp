@@ -39,27 +39,22 @@ namespace aticboom {
     };
     
     Stair::~Stair() {
-        
     };
     
     void Stair::initAnimations() {
         char buffer [50];
-        
         bool night = Geometry::isNight(this->world);
-        
         sprintf (buffer, STAIR_PNG.c_str(), this->world);
         CCSprite* pSprite = CCSprite::spriteWithSpriteFrameName(buffer);
         if(night) {
             pSprite->setColor(ccc3(NIGHT_COLOR_CORRECTOR_R, NIGHT_COLOR_CORRECTOR_G, NIGHT_COLOR_CORRECTOR_B));
         }
         this->addChild(pSprite, 0, STAIR_SPRITE_TAG);
-        if (this->type == 1)
-        {
+        if (this->type == 1) {
             CCPoint currentPosition = this->getPosition();
             float currentYPosition = currentPosition.y;
             this->setPositionY(currentYPosition + STAIR_TILES_HEIGHT / 3 * Config::sharedConfig()->TILE_WIDTH);
         }
-        
         CCNode* sTapa = CCNode::node();
         CCSprite* pSpriteTapa = CCSprite::spriteWithSpriteFrameName("stair_door.png");
         pSpriteTapa->setAnchorPoint(CCPoint(1, 0.5f));
@@ -67,7 +62,7 @@ namespace aticboom {
         sTapa->addChild(pSpriteTapa, 1, STAIRDOOR_TAG);
         sTapa->setPosition(CCPoint(-pSprite->getContentSize().width/2,pSprite->getContentSize().height * 0.25));
         this->addChild(sTapa, 1, STAIRDOORPARENT_TAG);
-    } 
+    }
     
     void Stair::runAnimationAction(CCAction* action) {
         CCSprite* pSprite = (CCSprite*)this->getChildByTag(STAIR_SPRITE_TAG);
@@ -90,22 +85,18 @@ namespace aticboom {
         pSprite->setColor(ccc3(DARK_COLOR_CORRECTOR, DARK_COLOR_CORRECTOR, DARK_COLOR_CORRECTOR));
     }
     
-    void Stair::switchPosition()
-    {
-        if (this->type == 1)
-        {
+    void Stair::switchPosition() {
+        if (this->type == 1) {
             this->runAction(CCMoveBy::actionWithDuration(0.5, CCPoint(0, -(STAIR_TILES_HEIGHT / 3) * Config::sharedConfig()->TILE_HEIGHT)));
             this->type = 0;
         }
-        else if (this->type == 0)
-        {
+        else if (this->type == 0) {
             this->runAction(CCMoveBy::actionWithDuration(0.5, CCPoint(0, (STAIR_TILES_HEIGHT / 3) * Config::sharedConfig()->TILE_HEIGHT)));
             this->type = 1;
         }
     }
     
-    void Stair::doorOpenLeft()
-    {
+    void Stair::doorOpenLeft() {
         CCNode* nParent = (CCNode*)this->getChildByTag(STAIRDOORPARENT_TAG);
         CCSprite* pSpriteTapa = (CCSprite*)nParent->getChildByTag(STAIRDOOR_TAG);
         CCFiniteTimeAction* rotateAction = CCEaseBounceOut::actionWithAction(CCRotateBy::actionWithDuration(0.5, 90));
@@ -114,8 +105,7 @@ namespace aticboom {
         SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::fullPathFromRelativePath(SOUND_KNIFE.c_str()));
     }
     
-    void Stair::doorCloseLeft(CCNode* sender)
-    {
+    void Stair::doorCloseLeft(CCNode* sender) {
         CCNode* nParent = (CCNode*)this->getChildByTag(STAIRDOORPARENT_TAG);
         CCSprite* pSpriteTapa = (CCSprite*)nParent->getChildByTag(STAIRDOOR_TAG);
         CCFiniteTimeAction* rotateAction = CCEaseBounceOut::actionWithAction(CCRotateBy::actionWithDuration(0.25, -90));
@@ -123,8 +113,7 @@ namespace aticboom {
         SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::fullPathFromRelativePath(SOUND_KNIFE.c_str()));
     }
     
-    void Stair::doorOpenRight()
-    {
+    void Stair::doorOpenRight() {
         CCNode* nParent = (CCNode*)this->getChildByTag(STAIRDOORPARENT_TAG);
         CCFiniteTimeAction* rotateAction = CCEaseBounceOut::actionWithAction(CCRotateBy::actionWithDuration(0.5, -90));
         CCFiniteTimeAction* actionMoveDone = CCCallFuncN::actionWithTarget(this, callfuncN_selector(Stair::doorCloseRight));
@@ -132,11 +121,11 @@ namespace aticboom {
         SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::fullPathFromRelativePath(SOUND_KNIFE.c_str()));
     }
     
-    void Stair::doorCloseRight(CCNode* sender)
-    {
+    void Stair::doorCloseRight(CCNode* sender) {
         CCNode* nParent = (CCNode*)this->getChildByTag(STAIRDOORPARENT_TAG);
         CCFiniteTimeAction* rotateAction = CCEaseBounceOut::actionWithAction(CCRotateBy::actionWithDuration(0.25, 90));
         nParent->runAction(rotateAction);
         SimpleAudioEngine::sharedEngine()->playEffect(CCFileUtils::fullPathFromRelativePath(SOUND_KNIFE.c_str()));
     }
+    
 }

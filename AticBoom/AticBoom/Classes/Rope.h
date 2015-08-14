@@ -28,19 +28,17 @@
 
 #include <vector>
 #include <string>
-
 #include "Config.h"
 #include "Music.h"
-
 #include "json.h"
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
-//#include "CDAudioManager.h"
-
 #include "Geometry.h"
 
 namespace aticboom {
+    
     class Rope : public cocos2d::CCNode {
+        
     public:
         Rope(int burningTime);
         ~Rope();
@@ -52,18 +50,18 @@ namespace aticboom {
         void resumeRope();
         void explode();
         void addRope(int extraTime);
-        
         void pauseAudio(bool pause);
         
         cocos2d::CCMutableArray<cocos2d::CCSpriteFrame* >* ANIMATION_ROPE_BURN;
         cocos2d::CCMutableArray<cocos2d::CCSpriteFrame* >* ANIMATION_ROPE_STAY;
         cocos2d::CCMutableArray<cocos2d::CCSpriteFrame* >* ANIMATION_EXTRA_ROPE_BURN;
         cocos2d::CCMutableArray<cocos2d::CCSpriteFrame* >* ANIMATION_EXTRA_ROPE_STAY;
-    
+        
     private:
         void initAnimations();
+        
     };
+    
 }
-
 
 #endif

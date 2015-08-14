@@ -28,20 +28,21 @@
 
 #include <vector>
 #include <string>
-
 #include "Config.h"
 #include "Geometry.h"
 #include "Key.h"
 #include "Level.h"
-
 #include "json.h"
 #include "cocos2d.h"
 
 namespace aticboom {
+    
     class Floor : public cocos2d::CCNode {
+        
     public:
         Floor(Json::Value floor, int world);
         ~Floor();
+        
         int index;
         std::string name;
         int image;
@@ -55,6 +56,7 @@ namespace aticboom {
         void open();
         
     };
+    
 }
 
 #endif

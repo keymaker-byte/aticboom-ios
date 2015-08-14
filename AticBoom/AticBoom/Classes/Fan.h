@@ -28,29 +28,26 @@
 
 #include <vector>
 #include <string>
-
 #include "Config.h"
 #include "Music.h"
-
 #include "json.h"
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
-
 #include "GameObject.h"
 
 namespace aticboom {
-    class Fan: public GameObject 
-    {
+    
+    class Fan: public GameObject {
+        
     public:
         Fan(Json::Value fan, int world);
         ~Fan();
-        
-        
         
     private:
         void initParticles();
         
     };
+    
 }
 
 #endif

@@ -28,7 +28,6 @@
 
 #include <vector>
 #include <string>
-
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
 #include "CCTouchDispatcher.h"
@@ -39,29 +38,28 @@ using namespace cocos2d;
 using namespace CocosDenshion;
 using namespace std;
 
-class CreditsScene : public cocos2d::CCLayer
-{
+class CreditsScene : public cocos2d::CCLayer {
+    
 public:
     CreditsScene();
     ~CreditsScene();
-	virtual bool init();
+    virtual bool init();
     
-	static cocos2d::CCScene* scene();
-    
-    static CreditsScene* node() 
+    static cocos2d::CCScene* scene();
+    static CreditsScene* node()
     {
         CreditsScene *pRet = new CreditsScene();
-        if (pRet && pRet->init()) 
-        { 
-            pRet->autorelease(); 
-            return pRet; 
-        } 
-        else 
-        { 
-            delete pRet; 
-            pRet = NULL; 
-            return NULL; 
-        } 
+        if (pRet && pRet->init())
+        {
+            pRet->autorelease();
+            return pRet;
+        }
+        else
+        {
+            delete pRet;
+            pRet = NULL;
+            return NULL;
+        }
     };
     
     bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
@@ -70,6 +68,7 @@ public:
     void onExit();
     void keyBackClicked();
     void reloopCloud(CCNode* cloud);
+    
 };
 
 #endif

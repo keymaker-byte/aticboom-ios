@@ -28,20 +28,17 @@
 
 #include <vector>
 #include <string>
-
 #include "Config.h"
 #include "Music.h"
-
 #include "json.h"
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
-
 #include "GameObject.h"
 
-
 namespace aticboom {
-    class Star: public GameObject 
-    {
+    
+    class Star: public GameObject {
+        
     public:
         Star(Json::Value star, int world);
         ~Star();
@@ -57,8 +54,9 @@ namespace aticboom {
         
     private:
         void initAnimations();
-
+        
     };
+    
 }
 
 #endif

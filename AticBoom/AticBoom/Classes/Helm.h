@@ -28,19 +28,18 @@
 
 #include <vector>
 #include <string>
-
 #include "Config.h"
-
 #include "json.h"
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
-
 #include "Geometry.h"
 #include "Music.h"
 #include "GameScene.h"
 
 namespace aticboom {
+    
     class Helm : public cocos2d::CCNode {
+        
     public:
         Helm();
         ~Helm();
@@ -49,12 +48,12 @@ namespace aticboom {
         
         void activateHeml(int type, int score = 0, int bestScore = 0);
         void inactivateHeml();
-
-    
+        
     private:
         void initAnimations();
+        
     };
+    
 }
-
 
 #endif

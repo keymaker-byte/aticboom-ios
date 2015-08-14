@@ -28,7 +28,6 @@
 
 #include <vector>
 #include <string>
-
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
 #include "CCTouchDispatcher.h"
@@ -39,38 +38,36 @@ using namespace cocos2d;
 using namespace CocosDenshion;
 using namespace std;
 
-class IntroScene : public cocos2d::CCLayerColor
-{
+class IntroScene : public cocos2d::CCLayerColor {
+    
 public:
     IntroScene();
     ~IntroScene();
-	virtual bool init();
+    virtual bool init();
     
-	static cocos2d::CCScene* scene();
-    
-    static IntroScene* node() 
+    static cocos2d::CCScene* scene();
+    static IntroScene* node()
     {
         IntroScene *pRet = new IntroScene();
-        if (pRet && pRet->init()) 
-        { 
-            pRet->autorelease(); 
-            return pRet; 
-        } 
-        else 
-        { 
-            delete pRet; 
-            pRet = NULL; 
-            return NULL; 
-        } 
+        if (pRet && pRet->init())
+        {
+            pRet->autorelease();
+            return pRet;
+        }
+        else
+        {
+            delete pRet;
+            pRet = NULL;
+            return NULL;
+        }
     };
     
-    void goToTitle(CCObject* pSender); 
-    
+    void goToTitle(CCObject* pSender);
     void onEnter();
     void onExit();
-    
     void loadTextures();
     void readSoundSettings();
+    
 };
 
 #endif

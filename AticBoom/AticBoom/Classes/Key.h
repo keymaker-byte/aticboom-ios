@@ -28,22 +28,22 @@
 
 #include <vector>
 #include <string>
-
 #include "Config.h"
 #include "Music.h"
-
 #include "json.h"
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
-
 #include "GameObject.h"
 
 namespace aticboom {
-    class Key: public GameObject 
-    {
+    
+    class Key: public GameObject {
+    
     public:
         Key(Json::Value key, int world);
         ~Key();
+        
+        int floorIndex;
         
         void runAnimationAction(cocos2d::CCAction* action);
         void runMovingAction(cocos2d::CCAction* action);
@@ -51,15 +51,14 @@ namespace aticboom {
         void grab();
         void makeDark();
         
-         cocos2d::CCMutableArray<cocos2d::CCSpriteFrame* >* ANIMATION_KEY_STAY;
-         cocos2d::CCMutableArray<cocos2d::CCSpriteFrame* >* ANIMATION_KEY_GRAB;
-        
-        int floorIndex;
+        cocos2d::CCMutableArray<cocos2d::CCSpriteFrame* >* ANIMATION_KEY_STAY;
+        cocos2d::CCMutableArray<cocos2d::CCSpriteFrame* >* ANIMATION_KEY_GRAB;
         
     private:
         void initAnimations();
-
+        
     };
+    
 }
 
 #endif

@@ -29,7 +29,6 @@
 #include <vector>
 #include <string>
 #include <assert.h>
-
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
 #include "CCTouchDispatcher.h"
@@ -44,35 +43,32 @@ using namespace cocos2d;
 using namespace CocosDenshion;
 using namespace std;
 
-class WorldSelectScene : public cocos2d::CCLayer
-{
+class WorldSelectScene : public cocos2d::CCLayer {
+    
 public:
+    
     WorldSelectScene();
     ~WorldSelectScene();
-	virtual bool init();
+    virtual bool init();
     
-	static cocos2d::CCScene* scene(int worldId);
-
-    static WorldSelectScene* node(int worldId) 
+    static cocos2d::CCScene* scene(int worldId);
+    static WorldSelectScene* node(int worldId)
     {
         WorldSelectScene *pRet = new WorldSelectScene();
         pRet->worldId = worldId;
-        if (pRet && pRet->init()) 
-        { 
-            pRet->autorelease(); 
-            return pRet; 
-        } 
-        else 
-        { 
-            delete pRet; 
-            pRet = NULL; 
-            return NULL; 
-        } 
+        if (pRet && pRet->init())
+        {
+            pRet->autorelease();
+            return pRet;
+        }
+        else
+        {
+            delete pRet;
+            pRet = NULL;
+            return NULL;
+        }
     };
     
-    bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
-    void ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent);
-    void ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent);
     
     bool movingTouch;
     int touchMoved;
@@ -81,23 +77,24 @@ public:
     int worldId;
     int totalGold;
     int totalStar;
-
+    bool* enabled;
+    bool confirmationMode;
+    
+    bool ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent);
+    void ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent);
+    void ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent);
     void goToMenu(CCObject* pSender);
     void goToLevels(int worldId);
     void makeVisible();
     void reloopCloud(CCNode* cloud);
     int checkAllLevels(Json::Value rootL, int worldId);
     Json::Value readLevelsJson();
-    
-    bool* enabled;
-    
     void onEnter();
     void onExit();
     void showConfirmation();
     void hideConfirmation();
-    bool confirmationMode;
     void keyBackClicked();
-
+    
 };
 
 #endif

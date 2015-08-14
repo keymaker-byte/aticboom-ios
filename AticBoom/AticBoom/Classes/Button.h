@@ -27,26 +27,29 @@
 #define AticBoom_Button_h
 
 #include "cocos2d.h"
-//#include "CocosDenshion.h"
 #include "json.h"
 #include "GameObject.h"
 
 namespace aticboom {
-    class Button : public GameObject
-    {
+    
+    class Button : public GameObject {
+        
     public:
         Button(Json::Value button, int world);
         ~Button();
-        void press();
-        void makeDark();
+        
         int floorIndex;
         int stairIndex;
         int state;
         
+        void press();
+        void makeDark();
+        
     private:
         void initAnimations();
+        
     };
+    
 }
-
 
 #endif

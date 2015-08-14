@@ -23,19 +23,18 @@
 
 namespace aticboom {
     
-    class EXPORT_DLL AticBoomObjC
-    {
+    class EXPORT_DLL AticBoomObjC {
+        
     public:
         AticBoomObjC();
         ~AticBoomObjC();
         
         static AticBoomObjC* shared();
-        
         static void vibrate();
-
         static long memory();
-
+        
     };
+    
 }
 
 #endif 
